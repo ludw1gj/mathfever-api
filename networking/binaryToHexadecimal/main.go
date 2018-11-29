@@ -14,7 +14,6 @@ type BinaryToHexadecimalInput struct {
 	Binary string `json:"binary" name:"Binary"`
 }
 
-// Handler is our lambda handler invoked by the `lambda.Start` function call
 func Handler(request events.APIGatewayProxyRequest) (util.Response, error) {
 	var input BinaryToHexadecimalInput
 

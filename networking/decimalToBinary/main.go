@@ -11,12 +11,10 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
-// DecimalToBinaryInput contains needed values for ExecuteMath method.
 type DecimalToBinaryInput struct {
 	Decimal int `json:"decimal" name:"Decimal"`
 }
 
-// Handler is our lambda handler invoked by the `lambda.Start` function call
 func Handler(request events.APIGatewayProxyRequest) (util.Response, error) {
 	var input DecimalToBinaryInput
 

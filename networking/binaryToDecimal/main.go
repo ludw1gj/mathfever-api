@@ -14,7 +14,6 @@ type binaryToDecimalInput struct {
 	Binary string `json:"binary"`
 }
 
-// Handler is our lambda handler invoked by the `lambda.Start` function call
 func Handler(request events.APIGatewayProxyRequest) (util.Response, error) {
 	var input binaryToDecimalInput
 

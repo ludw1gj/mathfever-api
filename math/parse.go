@@ -1,4 +1,4 @@
-package util
+package math
 
 import (
 	"bytes"
@@ -6,7 +6,7 @@ import (
 	"html/template"
 )
 
-func ParseTemplate(tplStr string, data interface{}) (string, error) {
+func parseTemplate(tplStr string, data interface{}) (string, error) {
 	tpl := template.Must(template.New("t1").Parse(tplStr))
 
 	var buf bytes.Buffer

@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"math"
 	"strconv"
-
-	"github.com/ludw1gj/mathfever/util"
 )
 
 // BinaryToDecimal outputs the proof and answer of a binary to decimal conversion.
@@ -78,7 +76,7 @@ func BinaryToDecimal(binary string) (string, error) {
 
 	<p class="word-break">({{.Binary}})<sub>2</sub> = ({{.Answer}})<sub>10</sub></p>`
 
-	return util.ParseTemplate(tpl, data)
+	return parseTemplate(tpl, data)
 }
 
 // BinaryToHexadecimal outputs the proof and answer of a binary to hexadecimal conversion.
@@ -148,7 +146,7 @@ func BinaryToHexadecimal(binary string) (string, error) {
 
 	<p class="word-break">({{.Binary}})<sub>2</sub> = ({{.Answer}})<sub>16</sub></p>`
 
-	return util.ParseTemplate(tpl, data)
+	return parseTemplate(tpl, data)
 }
 
 // DecimalToBinary outputs the proof and answer of a decimal to binary conversion.
@@ -239,5 +237,5 @@ func decimalToBinaryHexadecimal(decimal int, base int) (string, error) {
 	<p class="word-break">({{.Decimal}})<sub>10</sub> = (<span class="word-break">{{.Answer}}</span>)<sub>{{.Base}}</sub>
 	</p>`
 
-	return util.ParseTemplate(tpl, data)
+	return parseTemplate(tpl, data)
 }

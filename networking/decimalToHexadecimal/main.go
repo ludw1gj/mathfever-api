@@ -15,7 +15,6 @@ type DecimalToHexadecimalAPI struct {
 	Decimal int `json:"decimal" name:"Decimal"`
 }
 
-// Handler is our lambda handler invoked by the `lambda.Start` function call
 func Handler(request events.APIGatewayProxyRequest) (util.Response, error) {
 	var input DecimalToHexadecimalAPI
 
