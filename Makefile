@@ -2,8 +2,10 @@
 
 build: gomodgen
 	export GO111MODULE=on
-	env GOOS=linux go build -ldflags="-s -w" -o bin/hello hello/main.go
-	env GOOS=linux go build -ldflags="-s -w" -o bin/world world/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/binaryToDecimal networking/binaryToDecimal/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/binaryToHexadecimal networking/binaryToHexadecimal/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/decimalToBinary networking/decimalToBinary/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/decimalToHexadecimal networking/decimalToHexadecimal/main.go
 
 clean:
 	rm -rf ./bin ./vendor Gopkg.lock
