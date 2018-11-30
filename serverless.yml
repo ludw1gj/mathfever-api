@@ -53,41 +53,129 @@ package:
     - ./bin/**
 
 functions:
+  # networking category
   binaryToDecimal:
-    handler: bin/binaryToDecimal
+    handler: bin/networking/binaryToDecimal
     events:
       - http:
-          path: binaryToDecimal
+          path: calculation/binary-to-decimal
           method: post
   binaryToHexadecimal:
-    handler: bin/binaryToHexadecimal
+    handler: bin/networking/binaryToHexadecimal
     events:
       - http:
-          path: binaryToHexadecimal
+          path: calculation/binary-to-hexadecimal
           method: post
   decimalToBinary:
-    handler: bin/decimalToBinary
+    handler: bin/networking/decimalToBinary
     events:
       - http:
-          path: decimalToBinary
+          path: calculation/decimal-to-binary
           method: post
   decimalToHexadecimal:
-    handler: bin/decimalToHexadecimal
+    handler: bin/networking/decimalToHexadecimal
     events:
       - http:
-          path: decimalToHexadecimal
+          path: calculation/decimal-to-hexadecimal
           method: post
   hexadecimalToBinary:
-    handler: bin/hexadecimalToBinary
+    handler: bin/networking/hexadecimalToBinary
     events:
       - http:
-          path: hexadecimalToBinary
+          path: calculation/hexadecimal-to-binary
           method: post
   hexadecimalToDecimal:
-    handler: bin/hexadecimalToDecimal
+    handler: bin/networking/hexadecimalToDecimal
     events:
       - http:
-          path: hexadecimalToDecimal
+          path: calculation/is-prime
+          method: post
+  # numbers category
+  isPrime:
+    handler: bin/numbers/isPrime
+    events:
+      - http:
+          path: calculation/is-prime
+          method: post
+  highestCommonFactor:
+    handler: bin/numbers/highestCommonFactor
+    events:
+      - http:
+          path: calculation/highest-common-factor
+          method: post
+  lowestCommonMultiple:
+    handler: bin/numbers/lowestCommonMultiple
+    events:
+      - http:
+          path: calculation/lowest-common-multiple
+          method: post
+  # percentages category
+  changeByPercentage:
+    handler: bin/percentages/changeByPercentage
+    events:
+      - http:
+          path: calculation/change-by-percentage
+          method: post
+  numberFromPercentage:
+    handler: bin/percentages/numberFromPercentage
+    events:
+      - http:
+          path: calculation/numbers-from-percentage
+          method: post
+  percentageChange:
+    handler: bin/percentages/percentageChange
+    events:
+      - http:
+          path: calculation/percentage-change
+          method: post
+  percentageFromNumber:
+    handler: bin/percentages/percentageFromNumber
+    events:
+      - http:
+          path: calculation/percentage-from-number
+          method: post
+  # tsa category
+  tsaPythagoreanTheorem:
+    handler: bin/tsa/tsaPythagoreanTheorem
+    events:
+      - http:
+          path: calculation/tsa-pythagorean-theorem
+          method: post
+  tsaCone:
+    handler: bin/tsa/tsaCone
+    events:
+      - http:
+          path: calculation/tsa-cone
+          method: post
+  tsaCube:
+    handler: bin/tsa/tsaCube
+    events:
+      - http:
+          path: calculation/tsa-cube
+          method: post
+  tsaCylinder:
+    handler: bin/tsa/tsaCylinder
+    events:
+      - http:
+          path: calculation/tsa-cylinder
+          method: post
+  tsaRectangularPrism:
+    handler: bin/tsa/tsaRectangularPrism
+    events:
+      - http:
+          path: calculation/tsa-rectangularPrism
+          method: post
+  tsaSphere:
+    handler: bin/tsa/tsaSphere
+    events:
+      - http:
+          path: calculation/tsa-sphere
+          method: post
+  tsaSquareBaseTriangle:
+    handler: bin/tsa/tsaSquareBaseTriangle
+    events:
+      - http:
+          path: calculation/tsa-square-base-triangle
           method: post
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
