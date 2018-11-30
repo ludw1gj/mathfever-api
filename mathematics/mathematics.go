@@ -1,10 +1,12 @@
 package mathematics
 
+import "encoding/json"
+
 // Mathematics type is for standardising the execution of calculation functions.
 type Mathematics interface {
 	// ExecuteMath returns a calculation function's string output and an error
 	// if validation or template error occurs.
-	ExecuteMath() (string, error)
+	ExecuteMath(data string) (string, error)
 }
 
 /* Networking category */
@@ -40,7 +42,10 @@ type HexadecimalToDecimalAPI struct {
 }
 
 // ExecuteMath validates inputs and executes the calculation.
-func (i BinaryToDecimalAPI) ExecuteMath() (string, error) {
+func (i BinaryToDecimalAPI) ExecuteMath(data string) (string, error) {
+	if err := json.Unmarshal([]byte(data), &i); err != nil {
+		return "", err
+	}
 	if err := validateBinary(i.Binary); err != nil {
 		return "", err
 	}
@@ -48,7 +53,10 @@ func (i BinaryToDecimalAPI) ExecuteMath() (string, error) {
 }
 
 // ExecuteMath validates inputs and executes the calculation.
-func (i BinaryToHexadecimalAPI) ExecuteMath() (string, error) {
+func (i BinaryToHexadecimalAPI) ExecuteMath(data string) (string, error) {
+	if err := json.Unmarshal([]byte(data), &i); err != nil {
+		return "", err
+	}
 	if err := validateBinary(i.Binary); err != nil {
 		return "", err
 	}
@@ -56,7 +64,10 @@ func (i BinaryToHexadecimalAPI) ExecuteMath() (string, error) {
 }
 
 // ExecuteMath validates inputs and executes the calculation.
-func (i DecimalToBinaryAPI) ExecuteMath() (string, error) {
+func (i DecimalToBinaryAPI) ExecuteMath(data string) (string, error) {
+	if err := json.Unmarshal([]byte(data), &i); err != nil {
+		return "", err
+	}
 	if err := validatePositiveInt(i.Decimal); err != nil {
 		return "", err
 	}
@@ -64,7 +75,10 @@ func (i DecimalToBinaryAPI) ExecuteMath() (string, error) {
 }
 
 // ExecuteMath validates inputs and executes the calculation.
-func (i DecimalToHexadecimalAPI) ExecuteMath() (string, error) {
+func (i DecimalToHexadecimalAPI) ExecuteMath(data string) (string, error) {
+	if err := json.Unmarshal([]byte(data), &i); err != nil {
+		return "", err
+	}
 	if err := validatePositiveInt(i.Decimal); err != nil {
 		return "", err
 	}
@@ -72,7 +86,10 @@ func (i DecimalToHexadecimalAPI) ExecuteMath() (string, error) {
 }
 
 // ExecuteMath validates inputs and executes the calculation.
-func (i HexadecimalToBinaryAPI) ExecuteMath() (string, error) {
+func (i HexadecimalToBinaryAPI) ExecuteMath(data string) (string, error) {
+	if err := json.Unmarshal([]byte(data), &i); err != nil {
+		return "", err
+	}
 	if err := validateHexadecimal(i.Hexadecimal); err != nil {
 		return "", err
 	}
@@ -80,7 +97,10 @@ func (i HexadecimalToBinaryAPI) ExecuteMath() (string, error) {
 }
 
 // ExecuteMath validates inputs and executes the calculation.
-func (i HexadecimalToDecimalAPI) ExecuteMath() (string, error) {
+func (i HexadecimalToDecimalAPI) ExecuteMath(data string) (string, error) {
+	if err := json.Unmarshal([]byte(data), &i); err != nil {
+		return "", err
+	}
 	if err := validateHexadecimal(i.Hexadecimal); err != nil {
 		return "", err
 	}
@@ -107,7 +127,10 @@ type LowestCommonMultipleAPI struct {
 }
 
 // ExecuteMath validates inputs and executes the calculation.
-func (i IsPrimeAPI) ExecuteMath() (string, error) {
+func (i IsPrimeAPI) ExecuteMath(data string) (string, error) {
+	if err := json.Unmarshal([]byte(data), &i); err != nil {
+		return "", err
+	}
 	if err := validatePositiveInt(i.Number); err != nil {
 		return "", err
 	}
@@ -115,7 +138,10 @@ func (i IsPrimeAPI) ExecuteMath() (string, error) {
 }
 
 // ExecuteMath validates inputs and executes the calculation.
-func (i HighestCommonFactorAPI) ExecuteMath() (string, error) {
+func (i HighestCommonFactorAPI) ExecuteMath(data string) (string, error) {
+	if err := json.Unmarshal([]byte(data), &i); err != nil {
+		return "", err
+	}
 	if err := validatePositiveInt(i.Num1, i.Num2); err != nil {
 		return "", err
 	}
@@ -123,7 +149,10 @@ func (i HighestCommonFactorAPI) ExecuteMath() (string, error) {
 }
 
 // ExecuteMath validates inputs and executes the calculation.
-func (i LowestCommonMultipleAPI) ExecuteMath() (string, error) {
+func (i LowestCommonMultipleAPI) ExecuteMath(data string) (string, error) {
+	if err := json.Unmarshal([]byte(data), &i); err != nil {
+		return "", err
+	}
 	if err := validatePositiveInt(i.Num1, i.Num2); err != nil {
 		return "", err
 	}
@@ -157,7 +186,10 @@ type PercentageFromNumberAPI struct {
 }
 
 // ExecuteMath validates inputs and executes the calculation.
-func (i ChangeByPercentageAPI) ExecuteMath() (string, error) {
+func (i ChangeByPercentageAPI) ExecuteMath(data string) (string, error) {
+	if err := json.Unmarshal([]byte(data), &i); err != nil {
+		return "", err
+	}
 	if err := validateFloat(false, i.Number, i.Percentage); err != nil {
 		return "", err
 	}
@@ -165,7 +197,10 @@ func (i ChangeByPercentageAPI) ExecuteMath() (string, error) {
 }
 
 // ExecuteMath validates inputs and executes the calculation.
-func (i NumberFromPercentageAPI) ExecuteMath() (string, error) {
+func (i NumberFromPercentageAPI) ExecuteMath(data string) (string, error) {
+	if err := json.Unmarshal([]byte(data), &i); err != nil {
+		return "", err
+	}
 	if err := validateFloat(false, i.Percentage, i.Number); err != nil {
 		return "", err
 	}
@@ -173,7 +208,10 @@ func (i NumberFromPercentageAPI) ExecuteMath() (string, error) {
 }
 
 // ExecuteMath validates inputs and executes the calculation.
-func (i PercentageChangeAPI) ExecuteMath() (string, error) {
+func (i PercentageChangeAPI) ExecuteMath(data string) (string, error) {
+	if err := json.Unmarshal([]byte(data), &i); err != nil {
+		return "", err
+	}
 	if err := validateFloat(false, i.Number, i.NewNumber); err != nil {
 		return "", err
 	}
@@ -181,7 +219,10 @@ func (i PercentageChangeAPI) ExecuteMath() (string, error) {
 }
 
 // ExecuteMath validates inputs and executes the calculation.
-func (i PercentageFromNumberAPI) ExecuteMath() (string, error) {
+func (i PercentageFromNumberAPI) ExecuteMath(data string) (string, error) {
+	if err := json.Unmarshal([]byte(data), &i); err != nil {
+		return "", err
+	}
 	if err := validateFloat(false, i.Number, i.TotalNumber); err != nil {
 		return "", err
 	}
@@ -232,7 +273,10 @@ type TsaSquareBaseTriangleAPI struct {
 }
 
 // ExecuteMath validates inputs and executes the calculation.
-func (i TsaPythagoreanTheoremAPI) ExecuteMath() (string, error) {
+func (i TsaPythagoreanTheoremAPI) ExecuteMath(data string) (string, error) {
+	if err := json.Unmarshal([]byte(data), &i); err != nil {
+		return "", err
+	}
 	if err := validateFloat(true, i.SideA, i.SideB); err != nil {
 		return "", err
 	}
@@ -240,7 +284,10 @@ func (i TsaPythagoreanTheoremAPI) ExecuteMath() (string, error) {
 }
 
 // ExecuteMath validates inputs and executes the calculation.
-func (i TsaConeAPI) ExecuteMath() (string, error) {
+func (i TsaConeAPI) ExecuteMath(data string) (string, error) {
+	if err := json.Unmarshal([]byte(data), &i); err != nil {
+		return "", err
+	}
 	if err := validateFloat(true, i.Radius, i.SlantHeight); err != nil {
 		return "", err
 	}
@@ -248,7 +295,10 @@ func (i TsaConeAPI) ExecuteMath() (string, error) {
 }
 
 // ExecuteMath validates inputs and executes the calculation.
-func (i TsaCubeAPI) ExecuteMath() (string, error) {
+func (i TsaCubeAPI) ExecuteMath(data string) (string, error) {
+	if err := json.Unmarshal([]byte(data), &i); err != nil {
+		return "", err
+	}
 	if err := validateFloat(true, i.Length); err != nil {
 		return "", err
 	}
@@ -256,7 +306,10 @@ func (i TsaCubeAPI) ExecuteMath() (string, error) {
 }
 
 // ExecuteMath validates inputs and executes the calculation.
-func (i TsaCylinderAPI) ExecuteMath() (string, error) {
+func (i TsaCylinderAPI) ExecuteMath(data string) (string, error) {
+	if err := json.Unmarshal([]byte(data), &i); err != nil {
+		return "", err
+	}
 	if err := validateFloat(true, i.Radius, i.Height); err != nil {
 		return "", err
 	}
@@ -264,7 +317,10 @@ func (i TsaCylinderAPI) ExecuteMath() (string, error) {
 }
 
 // ExecuteMath validates inputs and executes the calculation.
-func (i TsaRectangularPrismAPI) ExecuteMath() (string, error) {
+func (i TsaRectangularPrismAPI) ExecuteMath(data string) (string, error) {
+	if err := json.Unmarshal([]byte(data), &i); err != nil {
+		return "", err
+	}
 	if err := validateFloat(true, i.Height, i.Length, i.Width); err != nil {
 		return "", err
 	}
@@ -272,7 +328,10 @@ func (i TsaRectangularPrismAPI) ExecuteMath() (string, error) {
 }
 
 // ExecuteMath validates inputs and executes the calculation.
-func (i TsaSphereAPI) ExecuteMath() (string, error) {
+func (i TsaSphereAPI) ExecuteMath(data string) (string, error) {
+	if err := json.Unmarshal([]byte(data), &i); err != nil {
+		return "", err
+	}
 	if err := validateFloat(true, i.Radius); err != nil {
 		return "", err
 	}
@@ -280,7 +339,10 @@ func (i TsaSphereAPI) ExecuteMath() (string, error) {
 }
 
 // ExecuteMath validates inputs and executes the calculation.
-func (i TsaSquareBaseTriangleAPI) ExecuteMath() (string, error) {
+func (i TsaSquareBaseTriangleAPI) ExecuteMath(data string) (string, error) {
+	if err := json.Unmarshal([]byte(data), &i); err != nil {
+		return "", err
+	}
 	if err := validateFloat(true, i.BaseLength, i.Height); err != nil {
 		return "", err
 	}

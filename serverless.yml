@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: aws-go-mod # TODO: update this with your service name
+service: mathfever-api
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -20,6 +20,8 @@ frameworkVersion: '>=1.28.0 <2.0.0'
 
 provider:
   name: aws
+  stage: prod
+  region: ap-southeast-2
   runtime: go1.x
 
 # you can overwrite defaults here

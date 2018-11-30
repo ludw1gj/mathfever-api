@@ -18,14 +18,15 @@ type JSONResponse struct {
 	Content string `json:"content"`
 }
 
-func HandleAPI(request events.APIGatewayProxyRequest, input mathematics.Mathematics) (Response, error) {
-	if err := json.Unmarshal([]byte(request.Body), &input); err != nil {
-		return Response{StatusCode: 400}, nil
-	}
+type errorJSONResponse struct {
+	Error string `json:"error"`
+}
 
-	payload, err := input.ExecuteMath()
+func HandleAPI(request events.APIGatewayProxyRequest, input mathematics.Mathematics) (Response, error) {
+	payload, err := input.ExecuteMath(request.Body)
 	if err != nil {
-		return Response{StatusCode: 400}, err
+		errResp, _ := json.Marshal(errorJSONResponse{Error: err.Error()})
+		return Response{StatusCode: 400, Body: string(errResp)}, err
 	}
 
 	respBody, _ := json.Marshal(JSONResponse{payload})
