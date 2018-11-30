@@ -1,8 +1,9 @@
-package math
+package mathematics
 
 import (
 	"bytes"
 	"fmt"
+	"log"
 	"math"
 	"strconv"
 )
@@ -236,6 +237,147 @@ func decimalToBinaryHexadecimal(decimal int, base int) (string, error) {
 
 	<p class="word-break">({{.Decimal}})<sub>10</sub> = (<span class="word-break">{{.Answer}}</span>)<sub>{{.Base}}</sub>
 	</p>`
+
+	return parseTemplate(tpl, data)
+}
+
+// HexadecimalToBinary outputs the proof and answer of a hexadecimal to binary conversion.
+func HexadecimalToBinary(hexadecimal string) (string, error) {
+	var binaries bytes.Buffer
+	var proof bytes.Buffer
+
+	var buf bytes.Buffer
+	for _, char := range hexadecimal {
+		decimalChar, err := strconv.ParseInt(string(char), 16, 0)
+		if err != nil {
+			log.Println(err)
+			return "", err
+		}
+
+		binary := fmt.Sprintf("%b", decimalChar)
+		if (len(binary) % 4) == 0 {
+			fmt.Fprint(&binaries, binary)
+		} else {
+			n := 4 - (len(binary) % 4)
+			for i := 0; i < n; i++ {
+				buf.WriteString("0")
+			}
+			fmt.Fprint(&binaries, buf.String(), binary)
+			buf.Reset()
+		}
+		fmt.Fprintf(&proof, "(%s)<sub>16</sub> = (%s)<sub>2</sub><br>", string(char), binary)
+	}
+	binaries.Truncate(len(binaries.String()) - 1)
+
+	data := struct {
+		Hexadecimal string
+		Proof       string
+		Binaries    string
+		Answer      string
+	}{
+		hexadecimal,
+		proof.String(),
+		binaries.String(),
+		binaries.String(),
+	}
+
+	const tpl = `
+	<h6>Question:</h6>
+
+	<p>What is {{.Hexadecimal}} in binary?</p>
+
+	<h6>Answer:</h6>
+
+	<p>The hexadecimal number <b>{{.Hexadecimal}}</b> in binary is <b>{{.Answer}}</b>.</p>
+
+	<h6>Here's how to convert it:</h6>
+
+	<p>Convert each hexadecimal digit manually to its binary equivalent:<br>
+			Refer to the Conversion Table <a href="/category/networking/conversion-table" rel="noopener noreferrer"
+																			target="_blank">here</a>.<br>
+			{{.Proof}}</p>
+
+	<p>Join the digit equivalents together from first to last:<br>
+			{{.Binaries}}</p>
+
+	<h6>Therefore:</h6>
+
+	<p>({{.Hexadecimal}})<sub>16</sub> = ({{.Answer}})<sub>2</sub></p>
+	`
+
+	return parseTemplate(tpl, data)
+}
+
+// HexadecimalToDecimal outputs the proof and answer of a hexadecimal to decimal conversion.
+func HexadecimalToDecimal(hexadecimal string) (string, error) {
+	hexLength := len(hexadecimal) - 1
+
+	var decimals []int64
+	var proof1 bytes.Buffer
+	var proof2Buf [4]bytes.Buffer
+	var answer int64
+
+	for _, char := range hexadecimal {
+		decimal, err := strconv.ParseInt(string(char), 16, 0)
+		if err != nil {
+			log.Println(err)
+			return "", err
+		}
+		decimals = append(decimals, decimal)
+		power := int64(math.Pow(16, float64(hexLength)))
+		multiplied := decimal * power
+		answer += multiplied
+
+		fmt.Fprintf(&proof1, "(%s)<sub>16</sub> = (%d)<sub>10</sub><br>", string(char), decimal)
+
+		fmt.Fprintf(&proof2Buf[0], "(%d x 16<sup>%d</sup>) + ", decimal, hexLength)
+		fmt.Fprintf(&proof2Buf[1], "(%d x %d) + ", decimal, power)
+		fmt.Fprintf(&proof2Buf[2], "%d + ", decimal*power)
+		hexLength--
+	}
+	fmt.Fprintf(&proof2Buf[3], "%d + ", answer)
+
+	var proof2 [4]string
+	for i, line := range proof2Buf {
+		proof2Buf[i].Truncate(len(line.String()) - 3)
+		proof2[i] = fmt.Sprintf("%s = %s<br>", hexadecimal, proof2Buf[i].String())
+	}
+
+	data := struct {
+		Hexadecimal string
+		Proof1      string
+		Proof2      [4]string
+		Answer      int64
+	}{
+		hexadecimal,
+		proof1.String(),
+		proof2,
+		answer,
+	}
+
+	const tpl = `
+	<h6>Question:</h6>
+
+	<p>What is {{.Hexadecimal}} in decimal?</p>
+
+	<h6>Answer:</h6>
+
+	<p>The hexadecimal number <b>{{.Hexadecimal}}</b> in decimal is <b>{{.Answer}}</b>.</p>
+
+	<h6>Here's how to convert it:</h6>
+
+	<p>Get the decimal equivalent of each hexadecimal digit:<br>
+			Refer to the Conversion Table <a href="/category/networking/conversion-table" rel="noopener noreferrer"
+																			target="_blank">here</a>.<br>
+			{{.Proof1}}</p>
+
+	<p>Multiply each hexadecimal digit with 16 power of digit position. Digit position starts from zero, right to
+			left:<br>
+			{{range .Proof2}}{{.}}{{end}}</p>
+
+	<h6>Therefore:</h6>
+
+	<p class="word-break">({{.Hexadecimal}})<sub>16</sub> = ({{.Answer}})<sub>10</sub></p>`
 
 	return parseTemplate(tpl, data)
 }

@@ -59,6 +59,36 @@ functions:
       - http:
           path: binaryToDecimal
           method: post
+  binaryToHexadecimal:
+    handler: bin/binaryToHexadecimal
+    events:
+      - http:
+          path: binaryToHexadecimal
+          method: post
+  decimalToBinary:
+    handler: bin/decimalToBinary
+    events:
+      - http:
+          path: decimalToBinary
+          method: post
+  decimalToHexadecimal:
+    handler: bin/decimalToHexadecimal
+    events:
+      - http:
+          path: decimalToHexadecimal
+          method: post
+  hexadecimalToBinary:
+    handler: bin/hexadecimalToBinary
+    events:
+      - http:
+          path: hexadecimalToBinary
+          method: post
+  hexadecimalToDecimal:
+    handler: bin/hexadecimalToDecimal
+    events:
+      - http:
+          path: hexadecimalToDecimal
+          method: post
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

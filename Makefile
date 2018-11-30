@@ -6,6 +6,8 @@ build: gomodgen
 	env GOOS=linux go build -ldflags="-s -w" -o bin/binaryToHexadecimal networking/binaryToHexadecimal/main.go
 	env GOOS=linux go build -ldflags="-s -w" -o bin/decimalToBinary networking/decimalToBinary/main.go
 	env GOOS=linux go build -ldflags="-s -w" -o bin/decimalToHexadecimal networking/decimalToHexadecimal/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/hexadecimalToBinary networking/hexadecimalToBinary/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/hexadecimalToDecimal networking/hexadecimalToDecimal/main.go
 
 clean:
 	rm -rf ./bin ./vendor Gopkg.lock
