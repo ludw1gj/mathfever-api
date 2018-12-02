@@ -1,38 +1,37 @@
-.PHONY: build clean deploy gomodgen
+.PHONY: build clean deploy
 
-build: gomodgen
-	export GO111MODULE=on
+build:
+	# categories GET
+	env GOOS=linux go build -ldflags="-s -w" -o bin/categories src/categories/main.go
+
 	# networking category
-	env GOOS=linux go build -ldflags="-s -w" -o bin/networking/binaryToDecimal category/networking/binaryToDecimal/main.go
-	env GOOS=linux go build -ldflags="-s -w" -o bin/networking/binaryToHexadecimal category/networking/binaryToHexadecimal/main.go
-	env GOOS=linux go build -ldflags="-s -w" -o bin/networking/decimalToBinary category/networking/decimalToBinary/main.go
-	env GOOS=linux go build -ldflags="-s -w" -o bin/networking/decimalToHexadecimal category/networking/decimalToHexadecimal/main.go
-	env GOOS=linux go build -ldflags="-s -w" -o bin/networking/hexadecimalToBinary category/networking/hexadecimalToBinary/main.go
-	env GOOS=linux go build -ldflags="-s -w" -o bin/networking/hexadecimalToDecimal category/networking/hexadecimalToDecimal/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/calculations/networking/binaryToDecimal src/calculations/networking/binaryToDecimal/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/calculations/networking/binaryToHexadecimal src/calculations/networking/binaryToHexadecimal/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/calculations/networking/decimalToBinary src/calculations/networking/decimalToBinary/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/calculations/networking/decimalToHexadecimal src/calculations/networking/decimalToHexadecimal/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/calculations/networking/hexadecimalToBinary src/calculations/networking/hexadecimalToBinary/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/calculations/networking/hexadecimalToDecimal src/calculations/networking/hexadecimalToDecimal/main.go
 	# numbers category
-	env GOOS=linux go build -ldflags="-s -w" -o bin/numbers/highestCommonFactor category/numbers/highestCommonFactor/main.go
-	env GOOS=linux go build -ldflags="-s -w" -o bin/numbers/isPrime category/numbers/isPrime/main.go
-	env GOOS=linux go build -ldflags="-s -w" -o bin/numbers/lowestCommonMultiple category/numbers/lowestCommonMultiple/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/calculations/numbers/highestCommonFactor src/calculations/numbers/highestCommonFactor/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/calculations/numbers/isPrime src/calculations/numbers/isPrime/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/calculations/numbers/lowestCommonMultiple src/calculations/numbers/lowestCommonMultiple/main.go
 	# percentages category
-	env GOOS=linux go build -ldflags="-s -w" -o bin/percentages/changeByPercentage category/percentages/changeByPercentage/main.go
-	env GOOS=linux go build -ldflags="-s -w" -o bin/percentages/numberFromPercentage category/percentages/numberFromPercentage/main.go
-	env GOOS=linux go build -ldflags="-s -w" -o bin/percentages/percentageChange category/percentages/percentageChange/main.go
-	env GOOS=linux go build -ldflags="-s -w" -o bin/percentages/percentageFromNumber category/percentages/percentageFromNumber/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/calculations/percentages/changeByPercentage src/calculations/percentages/changeByPercentage/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/calculations/percentages/numberFromPercentage src/calculations/percentages/numberFromPercentage/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/calculations/percentages/percentageChange src/calculations/percentages/percentageChange/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/calculations/percentages/percentageFromNumber src/calculations/percentages/percentageFromNumber/main.go
 	# tsa category
-	env GOOS=linux go build -ldflags="-s -w" -o bin/tsa/tsaCone category/tsa/tsaCone/main.go
-	env GOOS=linux go build -ldflags="-s -w" -o bin/tsa/tsaCube category/tsa/tsaCube/main.go
-	env GOOS=linux go build -ldflags="-s -w" -o bin/tsa/tsaCylinder category/tsa/tsaCylinder/main.go
-	env GOOS=linux go build -ldflags="-s -w" -o bin/tsa/tsaPythagoreanTheorem category/tsa/tsaPythagoreanTheorem/main.go
-	env GOOS=linux go build -ldflags="-s -w" -o bin/tsa/tsaRectangularPrism category/tsa/tsaRectangularPrism/main.go
-	env GOOS=linux go build -ldflags="-s -w" -o bin/tsa/tsaSphere category/tsa/tsaSphere/main.go
-	env GOOS=linux go build -ldflags="-s -w" -o bin/tsa/tsaSquareBaseTriangle category/tsa/tsaSquareBaseTriangle/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/calculations/tsa/tsaCone src/calculations/tsa/tsaCone/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/calculations/tsa/tsaCube src/calculations/tsa/tsaCube/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/calculations/tsa/tsaCylinder src/calculations/tsa/tsaCylinder/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/calculations/tsa/tsaPythagoreanTheorem src/calculations/tsa/tsaPythagoreanTheorem/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/calculations/tsa/tsaRectangularPrism src/calculations/tsa/tsaRectangularPrism/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/calculations/tsa/tsaSphere src/calculations/tsa/tsaSphere/main.go
+	env GOOS=linux go build -ldflags="-s -w" -o bin/calculations/tsa/tsaSquareBaseTriangle src/calculations/tsa/tsaSquareBaseTriangle/main.go
 
 clean:
 	rm -rf ./bin ./vendor Gopkg.lock
 
 deploy: clean build
-	sls deploy --verbose
-
-gomodgen:
-	chmod u+x gomod.sh
-	./gomod.sh
+	serverless deploy --verbose
+	

@@ -20,13 +20,9 @@ frameworkVersion: '>=1.28.0 <2.0.0'
 
 provider:
   name: aws
-  stage: prod
+  stage: beta
   region: ap-southeast-2
   runtime: go1.x
-
-# you can overwrite defaults here
-#  stage: dev
-#  region: us-east-1
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
@@ -55,130 +51,178 @@ package:
     - ./bin/**
 
 functions:
+  categories:
+    handler: bin/categories/categories
+    memorySize: 128
+    events:
+      - http:
+          path: categories
+          method: get
+          cors: true
   # networking category
   binaryToDecimal:
-    handler: bin/networking/binaryToDecimal
+    handler: bin/calculation/networking/binaryToDecimal
+    memorySize: 128
     events:
       - http:
           path: calculation/binary-to-decimal
           method: post
+          cors: true
   binaryToHexadecimal:
-    handler: bin/networking/binaryToHexadecimal
+    handler: bin/calculation/networking/binaryToHexadecimal
+    memorySize: 128
     events:
       - http:
           path: calculation/binary-to-hexadecimal
           method: post
+          cors: true
   decimalToBinary:
-    handler: bin/networking/decimalToBinary
+    handler: bin/calculation/networking/decimalToBinary
+    memorySize: 128
     events:
       - http:
           path: calculation/decimal-to-binary
           method: post
+          cors: true
   decimalToHexadecimal:
-    handler: bin/networking/decimalToHexadecimal
+    handler: bin/calculation/networking/decimalToHexadecimal
+    memorySize: 128
     events:
       - http:
           path: calculation/decimal-to-hexadecimal
           method: post
+          cors: true
   hexadecimalToBinary:
-    handler: bin/networking/hexadecimalToBinary
+    handler: bin/calculation/networking/hexadecimalToBinary
+    memorySize: 128
     events:
       - http:
           path: calculation/hexadecimal-to-binary
           method: post
+          cors: true
   hexadecimalToDecimal:
-    handler: bin/networking/hexadecimalToDecimal
+    handler: bin/calculation/networking/hexadecimalToDecimal
+    memorySize: 128
     events:
       - http:
           path: calculation/is-prime
           method: post
-  # numbers category
+          cors: true
+  # prime and numbers category
   isPrime:
-    handler: bin/numbers/isPrime
+    handler: bin/calculation/numbers/isPrime
+    memorySize: 128
     events:
       - http:
           path: calculation/is-prime
           method: post
+          cors: true
   highestCommonFactor:
-    handler: bin/numbers/highestCommonFactor
+    handler: bin/calculation/numbers/highestCommonFactor
+    memorySize: 128
     events:
       - http:
           path: calculation/highest-common-factor
           method: post
+          cors: true
   lowestCommonMultiple:
-    handler: bin/numbers/lowestCommonMultiple
+    handler: bin/calculation/numbers/lowestCommonMultiple
+    memorySize: 128
     events:
       - http:
           path: calculation/lowest-common-multiple
           method: post
+          cors: true
   # percentages category
   changeByPercentage:
-    handler: bin/percentages/changeByPercentage
+    handler: bin/calculation/percentages/changeByPercentage
+    memorySize: 128
     events:
       - http:
-          path: calculation/change-by-percentage
+          path: calculation/change-number-by-percentage
           method: post
+          cors: true
   numberFromPercentage:
-    handler: bin/percentages/numberFromPercentage
+    handler: bin/calculation/percentages/numberFromPercentage
+    memorySize: 128
     events:
       - http:
-          path: calculation/numbers-from-percentage
+          path: calculation/get-number-from-a-percentage
           method: post
+          cors: true
   percentageChange:
-    handler: bin/percentages/percentageChange
+    handler: bin/calculation/percentages/percentageChange
+    memorySize: 128
     events:
       - http:
-          path: calculation/percentage-change
+          path: calculation/find-percentage-difference-of-two-numbers
           method: post
+          cors: true
   percentageFromNumber:
-    handler: bin/percentages/percentageFromNumber
+    handler: bin/calculation/percentages/percentageFromNumber
+    memorySize: 128
     events:
       - http:
-          path: calculation/percentage-from-number
+          path: calculation/find-percentages-of-a-number
           method: post
+          cors: true
   # tsa category
   tsaPythagoreanTheorem:
-    handler: bin/tsa/tsaPythagoreanTheorem
+    handler: bin/calculation/tsa/tsaPythagoreanTheorem
+    memorySize: 128
     events:
       - http:
           path: calculation/tsa-pythagorean-theorem
           method: post
+          cors: true
   tsaCone:
-    handler: bin/tsa/tsaCone
+    handler: bin/calculation/tsa/tsaCone
+    memorySize: 128
     events:
       - http:
           path: calculation/tsa-cone
           method: post
+          cors: true
   tsaCube:
-    handler: bin/tsa/tsaCube
+    handler: bin/calculation/tsa/tsaCube
+    memorySize: 128
     events:
       - http:
           path: calculation/tsa-cube
           method: post
+          cors: true
   tsaCylinder:
-    handler: bin/tsa/tsaCylinder
+    handler: bin/calculation/tsa/tsaCylinder
+    memorySize: 128
     events:
       - http:
           path: calculation/tsa-cylinder
           method: post
+          cors: true
   tsaRectangularPrism:
-    handler: bin/tsa/tsaRectangularPrism
+    handler: bin/calculation/tsa/tsaRectangularPrism
+    memorySize: 128
     events:
       - http:
           path: calculation/tsa-rectangularPrism
           method: post
+          cors: true
   tsaSphere:
-    handler: bin/tsa/tsaSphere
+    handler: bin/calculation/tsa/tsaSphere
+    memorySize: 128
     events:
       - http:
           path: calculation/tsa-sphere
           method: post
+          cors: true
   tsaSquareBaseTriangle:
-    handler: bin/tsa/tsaSquareBaseTriangle
+    handler: bin/calculation/tsa/tsaSquareBaseTriangle
+    memorySize: 128
     events:
       - http:
           path: calculation/tsa-square-base-triangle
           method: post
+          cors: true
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
