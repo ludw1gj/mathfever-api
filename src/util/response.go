@@ -2,6 +2,8 @@ package util
 
 import (
 	"encoding/json"
+	"fmt"
+	"log"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/ludw1gj/mathfever/src/mathematics"
@@ -20,8 +22,7 @@ type ErrorJSONResponse struct {
 func HandleAPI(request events.APIGatewayProxyRequest, input mathematics.Mathematics) (Response, error) {
 	payload, err := input.ExecuteMath(request.Body)
 	if err != nil {
-		errResp, _ := json.Marshal(ErrorJSONResponse{Error: err.Error()})
-		return Response{StatusCode: 400, Body: string(errResp)}, err
+		return HandleError(err, "ExecuteMath fault", 400)
 	}
 
 	respBody, _ := json.Marshal(CalculationResponse{Content: payload})
@@ -35,4 +36,12 @@ func HandleAPI(request events.APIGatewayProxyRequest, input mathematics.Mathemat
 		},
 	}
 	return resp, nil
+}
+
+func HandleError(err error, msg string, code int) (Response, error) {
+	log.Printf("message: %v\nerror: %v\n", msg, err.Error())
+
+	newErr := fmt.Errorf("%v, %v", msg, err.Error())
+	jsonErrResp, _ := json.Marshal(ErrorJSONResponse{Error: newErr.Error()})
+	return Response{StatusCode: code, Body: string(jsonErrResp)}, nil
 }

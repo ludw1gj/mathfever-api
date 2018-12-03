@@ -2,8 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
-	"log"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -23,7 +21,7 @@ func Handler(request events.APIGatewayProxyRequest) (util.Response, error) {
 		Credentials: credentials.NewStaticCredentials(config.AWSAccessKeyID, config.AWSSecretAccessKey, ""),
 	})
 	if err != nil {
-		log.Println("New Session error: ", err.Error)
+		return util.HandleError(err, "New Session error", 500)
 	}
 
 	svc := dynamodb.New(sess)
@@ -33,14 +31,13 @@ func Handler(request events.APIGatewayProxyRequest) (util.Response, error) {
 	}
 	result, err := svc.Scan(params)
 	if err != nil {
-		fmt.Errorf("failed to make Query API call, %v", err.Error)
+		return util.HandleError(err, "failed to make Query API call", 500)
 	}
 
 	var categories []model.Category
 	err = dynamodbattribute.UnmarshalListOfMaps(result.Items, &categories)
 	if err != nil {
-		errResp, _ := json.Marshal(util.ErrorJSONResponse{Error: err.Error()})
-		return util.Response{StatusCode: 400, Body: string(errResp)}, err
+		return util.HandleError(err, "failed to unmarshal list", 500)
 	}
 
 	payload, _ := json.Marshal(categories)

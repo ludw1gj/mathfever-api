@@ -1,6 +1,8 @@
 package mathematics
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 // Mathematics type is for standardising the execution of calculation functions.
 type Mathematics interface {

@@ -184,6 +184,6 @@ functions:
     memorySize: 128
     events:
       - http:
-          path: calculation/tsa-square-base-triangle
+          path: calculation/tsa-square-based-triangle
           method: post
           cors: true
