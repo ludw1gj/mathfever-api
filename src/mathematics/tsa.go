@@ -68,7 +68,7 @@ func TsaPythagoreanTheorem(a float64, b float64) (string, error) {
 			{{.AB}} = c<sup>2</sup></p>
 
 	<p>Square root both sides:<br>
-			âˆš{{.AB}} = âˆšc<sup>2</sup><br>
+			&radic;{{.AB}} = &radic;c<sup>2</sup><br>
 			c = {{.Answer}}</p>
 
 	<h6>Therefore:</h6>

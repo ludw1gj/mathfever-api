@@ -16,7 +16,7 @@ package:
 
 functions:
   categories:
-    handler: bin/categories/categories
+    handler: bin/categories
     memorySize: 128
     events:
       - http:
@@ -25,7 +25,7 @@ functions:
           cors: true
   # networking category
   binaryToDecimal:
-    handler: bin/calculation/networking/binaryToDecimal
+    handler: bin/calculations/networking/binaryToDecimal
     memorySize: 128
     events:
       - http:
@@ -33,7 +33,7 @@ functions:
           method: post
           cors: true
   binaryToHexadecimal:
-    handler: bin/calculation/networking/binaryToHexadecimal
+    handler: bin/calculations/networking/binaryToHexadecimal
     memorySize: 128
     events:
       - http:
@@ -41,7 +41,7 @@ functions:
           method: post
           cors: true
   decimalToBinary:
-    handler: bin/calculation/networking/decimalToBinary
+    handler: bin/calculations/networking/decimalToBinary
     memorySize: 128
     events:
       - http:
@@ -49,7 +49,7 @@ functions:
           method: post
           cors: true
   decimalToHexadecimal:
-    handler: bin/calculation/networking/decimalToHexadecimal
+    handler: bin/calculations/networking/decimalToHexadecimal
     memorySize: 128
     events:
       - http:
@@ -57,7 +57,7 @@ functions:
           method: post
           cors: true
   hexadecimalToBinary:
-    handler: bin/calculation/networking/hexadecimalToBinary
+    handler: bin/calculations/networking/hexadecimalToBinary
     memorySize: 128
     events:
       - http:
@@ -65,7 +65,7 @@ functions:
           method: post
           cors: true
   hexadecimalToDecimal:
-    handler: bin/calculation/networking/hexadecimalToDecimal
+    handler: bin/calculations/networking/hexadecimalToDecimal
     memorySize: 128
     events:
       - http:
@@ -74,7 +74,7 @@ functions:
           cors: true
   # prime and numbers category
   isPrime:
-    handler: bin/calculation/numbers/isPrime
+    handler: bin/calculations/numbers/isPrime
     memorySize: 128
     events:
       - http:
@@ -82,7 +82,7 @@ functions:
           method: post
           cors: true
   highestCommonFactor:
-    handler: bin/calculation/numbers/highestCommonFactor
+    handler: bin/calculations/numbers/highestCommonFactor
     memorySize: 128
     events:
       - http:
@@ -90,7 +90,7 @@ functions:
           method: post
           cors: true
   lowestCommonMultiple:
-    handler: bin/calculation/numbers/lowestCommonMultiple
+    handler: bin/calculations/numbers/lowestCommonMultiple
     memorySize: 128
     events:
       - http:
@@ -99,7 +99,7 @@ functions:
           cors: true
   # percentages category
   changeByPercentage:
-    handler: bin/calculation/percentages/changeByPercentage
+    handler: bin/calculations/percentages/changeByPercentage
     memorySize: 128
     events:
       - http:
@@ -107,7 +107,7 @@ functions:
           method: post
           cors: true
   numberFromPercentage:
-    handler: bin/calculation/percentages/numberFromPercentage
+    handler: bin/calculations/percentages/numberFromPercentage
     memorySize: 128
     events:
       - http:
@@ -115,7 +115,7 @@ functions:
           method: post
           cors: true
   percentageChange:
-    handler: bin/calculation/percentages/percentageChange
+    handler: bin/calculations/percentages/percentageChange
     memorySize: 128
     events:
       - http:
@@ -123,7 +123,7 @@ functions:
           method: post
           cors: true
   percentageFromNumber:
-    handler: bin/calculation/percentages/percentageFromNumber
+    handler: bin/calculations/percentages/percentageFromNumber
     memorySize: 128
     events:
       - http:
@@ -132,7 +132,7 @@ functions:
           cors: true
   # tsa category
   tsaPythagoreanTheorem:
-    handler: bin/calculation/tsa/tsaPythagoreanTheorem
+    handler: bin/calculations/tsa/tsaPythagoreanTheorem
     memorySize: 128
     events:
       - http:
@@ -140,7 +140,7 @@ functions:
           method: post
           cors: true
   tsaCone:
-    handler: bin/calculation/tsa/tsaCone
+    handler: bin/calculations/tsa/tsaCone
     memorySize: 128
     events:
       - http:
@@ -148,7 +148,7 @@ functions:
           method: post
           cors: true
   tsaCube:
-    handler: bin/calculation/tsa/tsaCube
+    handler: bin/calculations/tsa/tsaCube
     memorySize: 128
     events:
       - http:
@@ -156,7 +156,7 @@ functions:
           method: post
           cors: true
   tsaCylinder:
-    handler: bin/calculation/tsa/tsaCylinder
+    handler: bin/calculations/tsa/tsaCylinder
     memorySize: 128
     events:
       - http:
@@ -164,15 +164,15 @@ functions:
           method: post
           cors: true
   tsaRectangularPrism:
-    handler: bin/calculation/tsa/tsaRectangularPrism
+    handler: bin/calculations/tsa/tsaRectangularPrism
     memorySize: 128
     events:
       - http:
-          path: calculation/tsa-rectangularPrism
+          path: calculation/tsa-rectangular-prism
           method: post
           cors: true
   tsaSphere:
-    handler: bin/calculation/tsa/tsaSphere
+    handler: bin/calculations/tsa/tsaSphere
     memorySize: 128
     events:
       - http:
@@ -180,7 +180,7 @@ functions:
           method: post
           cors: true
   tsaSquareBaseTriangle:
-    handler: bin/calculation/tsa/tsaSquareBaseTriangle
+    handler: bin/calculations/tsa/tsaSquareBaseTriangle
     memorySize: 128
     events:
       - http:
