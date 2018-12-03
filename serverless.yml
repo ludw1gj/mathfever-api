@@ -69,7 +69,7 @@ functions:
     memorySize: 128
     events:
       - http:
-          path: calculation/is-prime
+          path: calculation/hexadecimal-to-decimal
           method: post
           cors: true
   # prime and numbers category

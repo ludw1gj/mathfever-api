@@ -314,7 +314,7 @@ func TsaRectangularPrism(height float64, length float64, width float64) (string,
 			width, and length &times height. That would be 2WH + 2LW + 2LH, which would be the same as 2(WH + LW + LH).</p>
 	
 	<p>Where H = 2, L = 4, W = 3:<br>
-			TSA = 2({{.Width}} Ã— {{.Height}} + {{.Length}} Ã— {{.Width}} + {{.Length}} Ã— {{.Height}})<br>
+			TSA = 2({{.Width}} &times {{.Height}} + {{.Length}} &times {{.Width}} + {{.Length}} &times {{.Height}})<br>
 			TSA = 2({{.Add}})<br>
 			TSA = {{.TSA}}</p>
 	
@@ -354,12 +354,12 @@ func TsaSphere(radius float64) (string, error) {
 	<h6>Here's how to calculate it:</h6>
 
 	<p>Find the Total Surface Area of a sphere, with the equation:<br>
-			TSA = 4 Ï€ r<sup>2</sup></p>
+			TSA = 4 &#928; r<sup>2</sup></p>
 
 	<p>r is the radius of the sphere.</p>
 
 	<p>Where r = {{.Radius}}:<br>
-			TSA = 4 &times Ï€ &times {{.Radius}}<sup>2</sup><br>
+			TSA = 4 &times &#928; &times {{.Radius}}<sup>2</sup><br>
 			TSA = {{.TSA}}</p>
 
 	<h6>Therefore:</h6>
