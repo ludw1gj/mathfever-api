@@ -8,7 +8,7 @@ import (
 )
 
 func Handler(request events.APIGatewayProxyRequest) (util.Response, error) {
-	return util.HandleAPI(request, mathematics.TsaPythagoreanTheoremAPI{})
+	return util.HandleMathAPI(request, mathematics.TsaPythagoreanTheoremAPI{})
 }
 
 func main() {

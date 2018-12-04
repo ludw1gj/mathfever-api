@@ -8,7 +8,7 @@ import (
 )
 
 func Handler(request events.APIGatewayProxyRequest) (util.Response, error) {
-	return util.HandleAPI(request, mathematics.HexadecimalToBinaryAPI{})
+	return util.HandleMathAPI(request, mathematics.HexadecimalToBinaryAPI{})
 }
 
 func main() {

@@ -21,7 +21,7 @@ func Handler(request events.APIGatewayProxyRequest) (util.Response, error) {
 		Credentials: credentials.NewStaticCredentials(config.AWSAccessKeyID, config.AWSSecretAccessKey, ""),
 	})
 	if err != nil {
-		return util.HandleError(err, "New Session error", 500)
+		return util.HandleErrorResponse(err, "New Session error", 500)
 	}
 
 	svc := dynamodb.New(sess)
@@ -31,19 +31,20 @@ func Handler(request events.APIGatewayProxyRequest) (util.Response, error) {
 	}
 	result, err := svc.Scan(params)
 	if err != nil {
-		return util.HandleError(err, "failed to make Query API call", 500)
+		return util.HandleErrorResponse(err, "failed to make Query API call", 500)
 	}
 
 	var categories []model.Category
 	err = dynamodbattribute.UnmarshalListOfMaps(result.Items, &categories)
 	if err != nil {
-		return util.HandleError(err, "failed to unmarshal list", 500)
+		return util.HandleErrorResponse(err, "failed to unmarshal list", 500)
 	}
 
 	payload, _ := json.Marshal(categories)
 	resp := util.Response{
-		StatusCode: 200,
-		Body:       string(payload),
+		IsBase64Encoded: true,
+		StatusCode:      200,
+		Body:            string(payload),
 		Headers: map[string]string{
 			"Content-Type":                     "application/json",
 			"Access-Control-Allow-Origin":      "*",

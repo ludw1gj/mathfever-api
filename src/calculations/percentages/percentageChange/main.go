@@ -8,7 +8,7 @@ import (
 )
 
 func Handler(request events.APIGatewayProxyRequest) (util.Response, error) {
-	return util.HandleAPI(request, mathematics.PercentageChangeAPI{})
+	return util.HandleMathAPI(request, mathematics.PercentageChangeAPI{})
 }
 
 func main() {

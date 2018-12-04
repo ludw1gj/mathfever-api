@@ -8,7 +8,7 @@ import (
 )
 
 func Handler(request events.APIGatewayProxyRequest) (util.Response, error) {
-	return util.HandleAPI(request, mathematics.IsPrimeAPI{})
+	return util.HandleMathAPI(request, mathematics.IsPrimeAPI{})
 }
 
 func main() {
