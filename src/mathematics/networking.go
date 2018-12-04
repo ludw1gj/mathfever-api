@@ -1,7 +1,6 @@
 package mathematics
 
 import (
-	"bytes"
 	"fmt"
 	"log"
 	"math"
@@ -22,10 +21,10 @@ func BinaryToDecimal(binary string) (string, error) {
 		power := int(math.Pow(base, float64(power)))
 		stepValue := int(digit) * power
 
-		proofStepsBuf[0].WriteString(fmt.Sprintf("(b=%d x %d<sup>n=%d</sup>) + ", digit, base, power))
-		proofStepsBuf[1].WriteString(fmt.Sprintf("(%d x %d<sup>%d</sup>) + ", digit, base, power))
-		proofStepsBuf[2].WriteString(fmt.Sprintf("(%d x %d) + ", digit, power))
-		proofStepsBuf[3].WriteString(fmt.Sprintf("(%d) + ", stepValue))
+		fmt.Fprintf(&proofStepsBuf[0], "(b=%d x %d<sup>n=%d</sup>) + ", digit, base, power)
+		fmt.Fprintf(&proofStepsBuf[1], "(%d x %d<sup>%d</sup>) + ", digit, base, power)
+		fmt.Fprintf(&proofStepsBuf[2], "(%d x %d) + ", digit, power)
+		fmt.Fprintf(&proofStepsBuf[3], "(%d) + ", stepValue)
 
 		answer += stepValue
 		power--
@@ -99,8 +98,8 @@ func BinaryToHexadecimal(binary string) (string, error) {
 		groupedBinary = append(groupedBinary, zeroedBinary[4*i:4*(i+1)])
 	}
 
-	var proof bytes.Buffer
-	var answer bytes.Buffer
+	var proof strings.Builder
+	var answer strings.Builder
 	for _, i := range groupedBinary {
 		decimalAnswer, err := strconv.ParseInt(i, 2, 0)
 		if err != nil {
@@ -165,8 +164,8 @@ func decimalToBinaryHexadecimal(decimal int, base int) (string, error) {
 
 	var remainders []int
 	var remaindersHex []string
-	var proof bytes.Buffer
-	var answer bytes.Buffer
+	var proof strings.Builder
+	var answer strings.Builder
 
 	for decimalInt != 0 {
 		currentValue := decimalInt
@@ -243,13 +242,14 @@ func decimalToBinaryHexadecimal(decimal int, base int) (string, error) {
 
 // HexadecimalToBinary outputs the proof and answer of a hexadecimal to binary conversion.
 func HexadecimalToBinary(hexadecimal string) (string, error) {
-	var binaries bytes.Buffer
-	var proof bytes.Buffer
+	var binaries strings.Builder
+	var proof strings.Builder
 
-	var buf bytes.Buffer
+	var buf strings.Builder
 	for _, char := range hexadecimal {
 		decimalChar, err := strconv.ParseInt(string(char), 16, 0)
 		if err != nil {
+			// a non hexadecimal character was passed in
 			log.Println(err)
 			return "", err
 		}
@@ -267,18 +267,17 @@ func HexadecimalToBinary(hexadecimal string) (string, error) {
 		}
 		fmt.Fprintf(&proof, "(%s)<sub>16</sub> = (%s)<sub>2</sub><br>", string(char), binary)
 	}
-	binaries.Truncate(len(binaries.String()) - 1)
+	// remove last character - binary variable overshoots by one in forloop
+	answer := binaries.String()[:binaries.Len()-1]
 
 	data := struct {
 		Hexadecimal string
 		Proof       string
-		Binaries    string
 		Answer      string
 	}{
 		hexadecimal,
 		proof.String(),
-		binaries.String(),
-		binaries.String(),
+		answer,
 	}
 
 	const tpl = `
@@ -298,7 +297,7 @@ func HexadecimalToBinary(hexadecimal string) (string, error) {
 			{{.Proof}}</p>
 
 	<p>Join the digit equivalents together from first to last:<br>
-			{{.Binaries}}</p>
+			{{.Answer}}</p>
 
 	<h6>Therefore:</h6>
 
@@ -313,8 +312,8 @@ func HexadecimalToDecimal(hexadecimal string) (string, error) {
 	hexLength := len(hexadecimal) - 1
 
 	var decimals []int64
-	var proof1 bytes.Buffer
-	var proof2Buf [4]bytes.Buffer
+	var proof1 strings.Builder
+	var proof2Buf [4]strings.Builder
 	var answer int64
 
 	for _, char := range hexadecimal {
@@ -337,10 +336,10 @@ func HexadecimalToDecimal(hexadecimal string) (string, error) {
 	}
 	fmt.Fprintf(&proof2Buf[3], "%d + ", answer)
 
+	// add "${hexadecimal} = " to front, and remove " + " from the end
 	var proof2 [4]string
 	for i, line := range proof2Buf {
-		proof2Buf[i].Truncate(len(line.String()) - 3)
-		proof2[i] = fmt.Sprintf("%s = %s<br>", hexadecimal, proof2Buf[i].String())
+		proof2[i] = fmt.Sprintf("%s = %s<br>", hexadecimal, strings.TrimSuffix(line.String(), " + "))
 	}
 
 	data := struct {

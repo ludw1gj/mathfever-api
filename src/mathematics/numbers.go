@@ -1,9 +1,9 @@
 package mathematics
 
 import (
-	"bytes"
 	"fmt"
 	"math"
+	"strings"
 )
 
 // IsPrime checks if n is a prime number and returns if is/not a prime and why.
@@ -77,7 +77,7 @@ func IsPrime(n int) (string, error) {
 func findPrimeFactors(n int) (primeFactors []int, table string, proof string, factorFrequency map[int]int) {
 	generatePrimeFactorsAndTable := func(num int) ([]int, string) {
 		var primes []int
-		var tableBuf bytes.Buffer
+		var tableBuf strings.Builder
 
 		fmt.Fprint(&tableBuf, `
 		<table class="mdl-data-table mdl-js-data-table">
@@ -119,22 +119,22 @@ func findPrimeFactors(n int) (primeFactors []int, table string, proof string, fa
 	}
 
 	generateProof := func(num int, primes []int, frequency map[int]int) string {
-		var proofBuf bytes.Buffer
+		var proofBuf strings.Builder
 		for _, factor := range primes {
-			fmt.Fprintf(&proofBuf, "%d &times ", factor)
-		}
-		if len(primes) > 0 {
-			proofBuf.Truncate(len(proofBuf.String()) - 7)
+			if len(primes) > 0 {
+				fmt.Fprintf(&proofBuf, "%d", factor)
+			} else {
+				fmt.Fprintf(&proofBuf, "%d &times ", factor)
+			}
 		}
 		fmt.Fprintf(&proofBuf, "= %d<br>", num)
 
 		for factor := range frequency {
 			fmt.Fprintf(&proofBuf, "%d<sup>%d</sup> &times ", factor, frequency[factor])
 		}
-		proofBuf.Truncate(len(proofBuf.String()) - 7)
-		fmt.Fprintf(&proofBuf, "= %d<br>", num)
 
-		return proofBuf.String()
+		proof := fmt.Sprintf("%s = %d", strings.TrimSuffix(proofBuf.String(), " &times "), num)
+		return proof
 	}
 
 	primeFactors, table = generatePrimeFactorsAndTable(n)
@@ -150,26 +150,26 @@ func HighestCommonFactor(n1 int, n2 int) (string, error) {
 	primeFactors2, table2, proof2, _ := findPrimeFactors(n2)
 	commonNumbers := findCommonIntegers(primeFactors1, primeFactors2)
 
-	var sharedPrimes bytes.Buffer
-	var sharedPrimesProof bytes.Buffer
 	answer := 1
+	var sharedPrimesBuf strings.Builder
+	var sharedPrimesProofBuf strings.Builder
 	if len(commonNumbers) != 0 {
 		// shared primes
 		for _, n := range commonNumbers {
-			fmt.Fprintf(&sharedPrimes, "%d, ", n)
+			fmt.Fprintf(&sharedPrimesBuf, "%d, ", n)
 		}
-		sharedPrimes.Truncate(len(sharedPrimes.String()) - 2)
 
 		// shared primes proof
 		for _, n := range commonNumbers {
-			fmt.Fprintf(&sharedPrimesProof, "%d &times ", n)
+			fmt.Fprintf(&sharedPrimesProofBuf, "%d &times ", n)
 			answer *= n
 		}
-		sharedPrimesProof.Truncate(len(sharedPrimesProof.String()) - 7)
-		fmt.Fprintf(&sharedPrimesProof, " = %d", answer)
 	} else {
-		fmt.Fprint(&sharedPrimes, "There are no shared factors.")
+		fmt.Fprint(&sharedPrimesBuf, "There are no shared factors.")
 	}
+	// sharedPrimes might have ", " at the end
+	sharedPrimes := strings.TrimSuffix(sharedPrimesBuf.String(), ", ")
+	sharedPrimesProof := fmt.Sprintf("%s = %d", strings.TrimSuffix(sharedPrimesProofBuf.String(), " &times "), answer)
 
 	data := struct {
 		FirstNumber       int
@@ -188,8 +188,8 @@ func HighestCommonFactor(n1 int, n2 int) (string, error) {
 		table2,
 		proof1,
 		proof2,
-		sharedPrimes.String(),
-		sharedPrimesProof.String(),
+		sharedPrimes,
+		sharedPrimesProof,
 		answer,
 	}
 
@@ -254,14 +254,13 @@ func LowestCommonMultiple(n1 int, n2 int) (string, error) {
 		}
 	}
 
-	var compareProof bytes.Buffer
+	var compareProofBuf strings.Builder
 	answer := 1
 	for factor := range m {
-		fmt.Fprintf(&compareProof, "%d<sup>%d</sup> &times ", factor, m[factor])
+		fmt.Fprintf(&compareProofBuf, "%d<sup>%d</sup> &times ", factor, m[factor])
 		answer *= int(math.Pow(float64(factor), float64(m[factor])))
 	}
-	compareProof.Truncate(len(compareProof.String()) - 7)
-	fmt.Fprintf(&compareProof, "= %d", answer)
+	compareProof := fmt.Sprintf("%s = %d", strings.TrimSuffix(compareProofBuf.String(), " &times "), answer)
 
 	data := struct {
 		FirstNumber  int
@@ -279,7 +278,7 @@ func LowestCommonMultiple(n1 int, n2 int) (string, error) {
 		table2,
 		proof1,
 		proof2,
-		compareProof.String(),
+		compareProof,
 		answer,
 	}
 
