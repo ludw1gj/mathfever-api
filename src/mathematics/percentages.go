@@ -40,36 +40,31 @@ func ChangeByPercentage(n float64, p float64) (string, error) {
 
 	const tpl = `
 	<h6>Question:</h6>
-
-	<p>Where the {{.Noun}} in percentage is {{.Percentage}}% and the number is {{.Number}}, find the resulting number.</p>
+	<p>Where the {{.Noun}} in percentage is {{.Percentage}}% and the number is {{.Number}}, find the 
+		resulting number.</p>
 
 	<h6>Answer:</h6>
-
 	<p>The number {{.Number}} {{.Noun}}d by {{.Percentage}}% is {{.Answer}}.</p>
 
 	<h6>Here's how to calculate it:</h6>
-
 	<p>Calculate using the equation shown below:<br>
-			(Number &#xf7; 100) &times Percentage + Number<br>
-			({{.Number}} &#xf7; 100) &times {{.Percentage}} + {{.Number}}</p>
-
+		(Number &#xf7; 100) &times Percentage + Number<br>
+		({{.Number}} &#xf7; 100) &times {{.Percentage}} + {{.Number}}</p>
 	<p>Find 1% of {{.Number}}:<br>
-			Number &#xf7; 100<br>
-			{{.Number}} &#xf7; 100<br>
-			{{.OnePercent}}</p>
-
+		Number &#xf7; 100<br>
+		{{.Number}} &#xf7; 100<br>
+		{{.OnePercent}}</p>
 	<p>Multiply the one percent value by {{.Percentage}} to find {{.Percentage}}% of {{.Number}}:<br>
-			{{.OnePercent}} &times Percentage<br>
-			{{.OnePercent}} &times {{.Percentage}}<br>
-			{{.AddValue}}</p>
-
-	<p>The value {{.AddValue}} is {{.Percentage}}% of {{.Number}}, add it to the Number to get the final answer:<br>
-			{{.AddValue}} + Number<br>
-			{{.AddValue}} + {{.Number}}<br>
-			{{.Answer}}</p>
+		{{.OnePercent}} &times Percentage<br>
+		{{.OnePercent}} &times {{.Percentage}}<br>
+		{{.AddValue}}</p>
+	<p>The value {{.AddValue}} is {{.Percentage}}% of {{.Number}}, add it to the Number to get the 
+		final answer:<br>
+		{{.AddValue}} + Number<br>
+		{{.AddValue}} + {{.Number}}<br>
+		{{.Answer}}</p>
 
 	<h6>Therefore:</h6>
-
 	<p>{{.Number}} {{.Noun}}d by {{.Percentage}}% is {{.Answer}}.</p>`
 
 	return parseTemplate(tpl, data)
@@ -99,32 +94,26 @@ func NumberFromPercentage(p float64, n float64) (string, error) {
 
 	const tpl = `
 	<h6>Question:</h6>
-
-	<p>Where the percentage is {{.Percentage}}% and the number is {{.Number}}, find the resulting number of the
-			percentage.</p>
+	<p>Where the percentage is {{.Percentage}}% and the number is {{.Number}}, find the resulting 
+		number of the percentage.</p>
 
 	<h6>Answer:</h6>
-
 	<p>{{.Percentage}}% of {{.Number}} is {{.Answer}}.</p>
 
 	<h6>Here's how to calculate it:</h6>
-
 	<p>Use the equation below:<br>
-			(Percentage &#xf7; 100) &times Number<br>
-			({{.Percentage}} &#xf7; 100) &times {{.Number}}</p>
-
+		(Percentage &#xf7; 100) &times Number<br>
+		({{.Percentage}} &#xf7; 100) &times {{.Number}}</p>
 	<p>Find the decimalised version of the Percentage:<br>
-			Percentage &#xf7; 100<br>
-			{{.Percentage}} &#xf7; 100<br>
-			{{.Divided}}</p>
-
+		Percentage &#xf7; 100<br>
+		{{.Percentage}} &#xf7; 100<br>
+		{{.Divided}}</p>
 	<p>Now multiply it with the Number to get the final answer:<br>
-			({{.Divided}}) &times Number<br>
-			({{.Divided}}) &times {{.Number}}<br>
-			{{.Answer}}</p>
+		({{.Divided}}) &times Number<br>
+		({{.Divided}}) &times {{.Number}}<br>
+		{{.Answer}}</p>
 
 	<h6>Therefore:</h6>
-
 	<p>{{.Percentage}}% of {{.Number}} is {{.Answer}}.</p>`
 
 	return parseTemplate(tpl, data)
@@ -157,35 +146,28 @@ func PercentageChange(n float64, newN float64) (string, error) {
 
 	const tpl = `
 	<h6>Question:</h6>
-
-	<p>Where original number is {{.Number}} and the new number is {{.NewNumber}}, find the difference between the numbers in
-			percentage.</p>
+	<p>Where original number is {{.Number}} and the new number is {{.NewNumber}}, find the difference 
+		between the numbers in percentage.</p>
 
 	<h6>Answer:</h6>
-
 	<p>The difference in percentage between {{.Number}} and {{.NewNumber}} is {{.Answer}}%.</p>
 
 	<h6>Here's how to calculate it:</h6>
-
 	<p>Calculate using the equation shown below:<br>
-			((New Number - Original Number) &#xf7; Original Number) &times 100<br>
-
+		((New Number - Original Number) &#xf7; Original Number) &times 100<br>
 	<p>Find the change in value between the two numbers:<br>
-			New Number - Original Number<br>
-			{{.NewNumber}} - {{.Number}}<br>
-			{{.Change}}</p>
-
+		New Number - Original Number<br>
+		{{.NewNumber}} - {{.Number}}<br>
+		{{.Change}}</p>
 	<p>Find the decimalised version of the percentage change using the change in value:<br>
-			{{.Change}} &#xf7; Original Number<br>
-			{{.Change}} &#xf7; {{.Number}}<br>
-			{{.DecimalisedPercentage}}</p>
-
+		{{.Change}} &#xf7; Original Number<br>
+		{{.Change}} &#xf7; {{.Number}}<br>
+		{{.DecimalisedPercentage}}</p>
 	<p>Convert decimalised percentage to percentage to get the final answer:<br>
-			{{.DecimalisedPercentage}} &times 100<br>
-			{{.Answer}}</p>
+		{{.DecimalisedPercentage}} &times 100<br>
+		{{.Answer}}</p>
 
 	<h6>Therefore:</h6>
-
 	<p>The percentage of change from {{.Number}} to {{.NewNumber}} is {{.Answer}}%.</p>`
 
 	return parseTemplate(tpl, data)
@@ -215,30 +197,24 @@ func PercentageFromNumber(n float64, totalN float64) (string, error) {
 
 	const tpl = `
 	<h6>Question:</h6>
-
-	<p>Where the number is {{.Number}} and the total number is {{.TotalNumber}}, find how much percentage {{.Number}} is of
-			{{.TotalNumber}}.</p>
+	<p>Where the number is {{.Number}} and the total number is {{.TotalNumber}}, find how much 
+		percentage {{.Number}} is of {{.TotalNumber}}.</p>
 
 	<h6>Answer:</h6>
-
 	<p>{{.Number}} is {{.Answer}}% of {{.TotalNumber}}.</p>
 
 	<h6>Here's how to calculate it:</h6>
-
 	<p>Calculate using the equation shown below:<br>
-			(Number &#xf7; Total Number) &times 100</p>
-
+		(Number &#xf7; Total Number) &times 100</p>
 	<p>Find the decimalised version of the percentage:<br>
-			Number &#xf7; Total Number<br>
-			{{.Number}} &#xf7; {{.TotalNumber}}<br>
-			{{.DecimalisedPercentage}}</p>
-
+		Number &#xf7; Total Number<br>
+		{{.Number}} &#xf7; {{.TotalNumber}}<br>
+		{{.DecimalisedPercentage}}</p>
 	<p>Convert decimalised percentage to percentage to get the answer:<br>
-			{{.DecimalisedPercentage}} &times 100<br>
-			{{.Answer}}</p>
+		{{.DecimalisedPercentage}} &times 100<br>
+		{{.Answer}}</p>
 
 	<h6>Therefore:</h6>
-
 	<p>{{.Number}} is {{.Answer}}% of {{.TotalNumber}}.</p>`
 
 	return parseTemplate(tpl, data)

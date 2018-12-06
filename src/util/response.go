@@ -11,7 +11,8 @@ import (
 
 type Response events.APIGatewayProxyResponse
 
-func HandleMathAPI(request events.APIGatewayProxyRequest, input mathematics.Mathematics) (Response, error) {
+func HandleMathAPI(request events.APIGatewayProxyRequest, input mathematics.Mathematics) (Response,
+	error) {
 	type CalculationResponse struct {
 		Content string `json:"answer"`
 	}

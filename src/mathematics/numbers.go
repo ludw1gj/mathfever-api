@@ -43,38 +43,34 @@ func IsPrime(n int) (string, error) {
 
 	const tpl = `
 	<h6>Question:</h6>
-
 	<p>Is {{.Number}} a prime number?</p>
 
 	<h6>Answer:</h6>
-
 	<p>{{.Answer}}</p>
 
 	<h6>Helpful Tips:</h6>
-
 	<p>Prime numbers are numbers whose only whole-number factors are 1 and itself.</p>
-
 	<p>To determine if a number (n) is a prime number, here are some rules:</p>
-
 	<ul>
-			<li>Prime numbers are defined for whole-numbers greater than 1.</li>
-			<li>1 is not considered a prime number.</li>
-			<li>2 is considered a prime number because its only whole-number factors are 1 and itself.</li>
-			<li>Any number that is divisible by 2 is not a prime number.</li>
-			<li>After the steps above, start by dividing the number by 3, then 5, then 7, and so on, checking if the number
-					can be divided by those divisors. As we have determined it cannot be divided by 2, there is no need to divide by
-					4, 6, 8, and so on.
-			</li>
-			<li>The maximum divisor to look for is the square root of your number, because: n=a&timesb and if both values
-					were greater than the square root of n, a&timesb would be larger than n. Therefore at least one of those
-					factors must be less than or equal to the square root of n.
-			</li>
+		<li>Prime numbers are defined for whole-numbers greater than 1.</li>
+		<li>1 is not considered a prime number.</li>
+		<li>2 is considered a prime number because its only whole-number factors are 1 and itself.</li>
+		<li>Any number that is divisible by 2 is not a prime number.</li>
+		<li>After the steps above, start by dividing the number by 3, then 5, then 7, and so on, 
+			checking if the number can be divided by those divisors. As we have determined it cannot be 
+			divided by 2, there is no need to divide by 4, 6, 8, and so on.
+		</li>
+		<li>The maximum divisor to look for is the square root of your number, because: n=a&timesb and 
+			if both values were greater than the square root of n, a&timesb would be larger than n. 
+			Therefore at least one of those factors must be less than or equal to the square root of n.
+		</li>
 	</ul>`
 
 	return parseTemplate(tpl, data)
 }
 
-func findPrimeFactors(n int) (primeFactors []int, table string, proof string, factorFrequency map[int]int) {
+func findPrimeFactors(n int) (primeFactors []int, table string, proof string,
+	factorFrequency map[int]int) {
 	generatePrimeFactorsAndTable := func(num int) ([]int, string) {
 		var primes []int
 		var tableBuf strings.Builder
@@ -169,7 +165,8 @@ func HighestCommonFactor(n1 int, n2 int) (string, error) {
 	}
 	// sharedPrimes might have ", " at the end
 	sharedPrimes := strings.TrimSuffix(sharedPrimesBuf.String(), ", ")
-	sharedPrimesProof := fmt.Sprintf("%s = %d", strings.TrimSuffix(sharedPrimesProofBuf.String(), " &times "), answer)
+	sharedPrimesProof := fmt.Sprintf("%s = %d", strings.TrimSuffix(sharedPrimesProofBuf.String(),
+		" &times "), answer)
 
 	data := struct {
 		FirstNumber       int
@@ -195,37 +192,28 @@ func HighestCommonFactor(n1 int, n2 int) (string, error) {
 
 	const tpl = `
 	<h6>Question:</h6>
-
 	<p>Find the highest common factor of {{.FirstNumber}} and {{.SecondNumber}}.</p>
 
 	<h6>Answer:</h6>
-
 	<p>The highest common factor of {{.FirstNumber}} and {{.SecondNumber}} is {{.Answer}}.</p>
 
 	<h6>Here's the working out:</h6>
-
 	<p>Finding all prime factors of {{.FirstNumber}}:</p>
 	{{.Table1}}
-
 	<p>Finding all prime factors of {{.SecondNumber}}:</p>
 	{{.Table2}}
-
 	<p>Prime factors for the first number are:<br>
-			{{.Proof1}}</p>
-
+		{{.Proof1}}</p>
 	<p>Prime factors for the second number are:<br>
-			{{.Proof2}}</p>
-
+		{{.Proof2}}</p>
 	<p>Find the primes that are shared between the two numbers:<br>
-			{{.SharedPrimes}}</p>
-
+		{{.SharedPrimes}}</p>
 	{{if .SharedPrimesProof}}
 	<p>Take the shared primes and multiply them together:<br>
-			{{.SharedPrimesProof}}</p>
+		{{.SharedPrimesProof}}</p>
 	{{end}}
 
 	<h6>Therefore:</h6>
-
 	<p>The highest common factor of {{.FirstNumber}} and {{.SecondNumber}} is {{.Answer}}.</p>`
 
 	return parseTemplate(tpl, data)
@@ -260,7 +248,8 @@ func LowestCommonMultiple(n1 int, n2 int) (string, error) {
 		fmt.Fprintf(&compareProofBuf, "%d<sup>%d</sup> &times ", factor, m[factor])
 		answer *= int(math.Pow(float64(factor), float64(m[factor])))
 	}
-	compareProof := fmt.Sprintf("%s = %d", strings.TrimSuffix(compareProofBuf.String(), " &times "), answer)
+	compareProof := fmt.Sprintf("%s = %d", strings.TrimSuffix(compareProofBuf.String(), " &times "),
+		answer)
 
 	data := struct {
 		FirstNumber  int
@@ -284,32 +273,25 @@ func LowestCommonMultiple(n1 int, n2 int) (string, error) {
 
 	const tpl = `
 	<h6>Question:</h6>
-
 	<p>Find the lowest common multiple of {{.FirstNumber}} and {{.SecondNumber}}.</p>
 
 	<h6>Answer:</h6>
-
 	<p>The lowest common multiple of {{.FirstNumber}} and {{.SecondNumber}} is {{.Answer}}.</p>
 
 	<h6>Here's the working out:</h6>
-
 	<p>Finding all prime factors of {{.FirstNumber}}:</p>
 	{{.Table1}}
-
 	<p>Finding all prime factors of {{.SecondNumber}}:</p>
 	{{.Table2}}
-
 	<p>Prime factors for the first number are:<br>
-			{{.Proof1}}</p>
-
+		{{.Proof1}}</p>
 	<p>Prime factors for the second number are:<br>
-			{{.Proof2}}</p>
-
-	<p>Compare the primes of the first and second numbers and use the sets with the highest exponent:<br>
-			{{.CompareProof}}</p>
+		{{.Proof2}}</p>
+	<p>Compare the primes of the first and second numbers and use the sets with the highest exponent:
+		<br>
+		{{.CompareProof}}</p>
 
 	<h6>Therefore:</h6>
-
 	<p>The lowest common multiple of {{.FirstNumber}} and {{.SecondNumber}} is {{.Answer}}.</p>`
 
 	return parseTemplate(tpl, data)
