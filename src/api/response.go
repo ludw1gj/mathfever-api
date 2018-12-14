@@ -1,4 +1,4 @@
-package util
+package api
 
 import (
 	"encoding/json"
@@ -6,12 +6,11 @@ import (
 	"log"
 
 	"github.com/aws/aws-lambda-go/events"
-	"github.com/ludw1gj/mathfever/src/mathematics"
 )
 
 type Response events.APIGatewayProxyResponse
 
-func HandleMathAPI(request events.APIGatewayProxyRequest, input mathematics.Mathematics) (Response,
+func HandleMathAPI(request events.APIGatewayProxyRequest, input Mathematics) (Response,
 	error) {
 	type CalculationResponse struct {
 		Content string `json:"answer"`
@@ -22,7 +21,10 @@ func HandleMathAPI(request events.APIGatewayProxyRequest, input mathematics.Math
 		return HandleErrorResponse(err, "ExecuteMath fault", 400)
 	}
 
-	respBody, _ := json.Marshal(CalculationResponse{Content: payload})
+	respBody, err := json.Marshal(CalculationResponse{Content: payload})
+	if err != nil {
+		return HandleErrorResponse(err, "failed to marshal payload", 500)
+	}
 	return HandleResponse(string(respBody))
 }
 
@@ -48,10 +50,20 @@ func HandleErrorResponse(err error, msg string, code int) (Response, error) {
 	}
 
 	newErr := fmt.Errorf("%v, %v", msg, err.Error())
-	jsonErrResp, _ := json.Marshal(ErrorJSONResponse{Error: newErr.Error()})
-	return Response{
+	jsonErrResp, err := json.Marshal(ErrorJSONResponse{Error: newErr.Error()})
+	if err != nil {
+		resp := Response{
+			IsBase64Encoded: true,
+			StatusCode:      500,
+			Body:            "failed to marshal error response",
+		}
+		return resp, nil
+	}
+
+	resp := Response{
 		IsBase64Encoded: true,
 		StatusCode:      code,
 		Body:            string(jsonErrResp),
-	}, nil
+	}
+	return resp, nil
 }

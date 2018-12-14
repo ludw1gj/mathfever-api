@@ -1,4 +1,4 @@
-package mathematics
+package api
 
 import (
 	"fmt"

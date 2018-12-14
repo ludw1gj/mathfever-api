@@ -10,48 +10,39 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
+	"github.com/ludw1gj/mathfever/src/api"
 	"github.com/ludw1gj/mathfever/src/categories/config"
-	"github.com/ludw1gj/mathfever/src/model"
-	"github.com/ludw1gj/mathfever/src/util"
 )
 
-func Handler(request events.APIGatewayProxyRequest) (util.Response, error) {
+func Handler(request events.APIGatewayProxyRequest) (api.Response, error) {
 	sess, err := session.NewSession(&aws.Config{
 		Region:      aws.String("ap-southeast-2"),
 		Credentials: credentials.NewStaticCredentials(config.AWSAccessKeyID, config.AWSSecretAccessKey, ""),
 	})
 	if err != nil {
-		return util.HandleErrorResponse(err, "New Session error", 500)
+		return api.HandleErrorResponse(err, "New Session error", 500)
 	}
 
 	svc := dynamodb.New(sess)
-
 	params := &dynamodb.ScanInput{
 		TableName: aws.String("MathFeverCategoriesTable"),
 	}
 	result, err := svc.Scan(params)
 	if err != nil {
-		return util.HandleErrorResponse(err, "failed to make Query API call", 500)
+		return api.HandleErrorResponse(err, "failed to make Query API call", 500)
 	}
 
-	var categories []model.Category
+	var categories []api.Category
 	err = dynamodbattribute.UnmarshalListOfMaps(result.Items, &categories)
 	if err != nil {
-		return util.HandleErrorResponse(err, "failed to unmarshal list", 500)
+		return api.HandleErrorResponse(err, "failed to unmarshal list", 500)
 	}
 
-	payload, _ := json.Marshal(categories)
-	resp := util.Response{
-		IsBase64Encoded: true,
-		StatusCode:      200,
-		Body:            string(payload),
-		Headers: map[string]string{
-			"Content-Type":                     "application/json",
-			"Access-Control-Allow-Origin":      "*",
-			"Access-Control-Allow-Credentials": "true",
-		},
+	payload, err := json.Marshal(categories)
+	if err != nil {
+		return api.HandleErrorResponse(err, "failed to marshal payload", 500)
 	}
-	return resp, nil
+	return api.HandleResponse(string(payload))
 }
 
 func main() {

@@ -1,7 +1,9 @@
-package mathematics
+package api
 
 import (
 	"encoding/json"
+
+	"github.com/ludw1gj/mathfever/src/mathematics"
 )
 
 // Mathematics type is for standardising the execution of calculation functions.
@@ -51,7 +53,7 @@ func (i BinaryToDecimalAPI) ExecuteMath(data string) (string, error) {
 	if err := validateBinary(i.Binary); err != nil {
 		return "", err
 	}
-	return BinaryToDecimal(i.Binary)
+	return mathematics.BinaryToDecimal(i.Binary)
 }
 
 // ExecuteMath validates inputs and executes the calculation.
@@ -62,7 +64,7 @@ func (i BinaryToHexadecimalAPI) ExecuteMath(data string) (string, error) {
 	if err := validateBinary(i.Binary); err != nil {
 		return "", err
 	}
-	return BinaryToHexadecimal(i.Binary)
+	return mathematics.BinaryToHexadecimal(i.Binary)
 }
 
 // ExecuteMath validates inputs and executes the calculation.
@@ -73,7 +75,7 @@ func (i DecimalToBinaryAPI) ExecuteMath(data string) (string, error) {
 	if err := validatePositiveInt(i.Decimal); err != nil {
 		return "", err
 	}
-	return DecimalToBinary(i.Decimal)
+	return mathematics.DecimalToBinary(i.Decimal)
 }
 
 // ExecuteMath validates inputs and executes the calculation.
@@ -84,7 +86,7 @@ func (i DecimalToHexadecimalAPI) ExecuteMath(data string) (string, error) {
 	if err := validatePositiveInt(i.Decimal); err != nil {
 		return "", err
 	}
-	return DecimalToHexadecimal(i.Decimal)
+	return mathematics.DecimalToHexadecimal(i.Decimal)
 }
 
 // ExecuteMath validates inputs and executes the calculation.
@@ -95,7 +97,7 @@ func (i HexadecimalToBinaryAPI) ExecuteMath(data string) (string, error) {
 	if err := validateHexadecimal(i.Hexadecimal); err != nil {
 		return "", err
 	}
-	return HexadecimalToBinary(i.Hexadecimal)
+	return mathematics.HexadecimalToBinary(i.Hexadecimal)
 }
 
 // ExecuteMath validates inputs and executes the calculation.
@@ -106,7 +108,7 @@ func (i HexadecimalToDecimalAPI) ExecuteMath(data string) (string, error) {
 	if err := validateHexadecimal(i.Hexadecimal); err != nil {
 		return "", err
 	}
-	return HexadecimalToDecimal(i.Hexadecimal)
+	return mathematics.HexadecimalToDecimal(i.Hexadecimal)
 }
 
 /* Primes and Factors category */
@@ -136,7 +138,7 @@ func (i IsPrimeAPI) ExecuteMath(data string) (string, error) {
 	if err := validatePositiveInt(i.Number); err != nil {
 		return "", err
 	}
-	return IsPrime(i.Number)
+	return mathematics.IsPrime(i.Number)
 }
 
 // ExecuteMath validates inputs and executes the calculation.
@@ -147,7 +149,7 @@ func (i HighestCommonFactorAPI) ExecuteMath(data string) (string, error) {
 	if err := validatePositiveInt(i.Num1, i.Num2); err != nil {
 		return "", err
 	}
-	return HighestCommonFactor(i.Num1, i.Num2)
+	return mathematics.HighestCommonFactor(i.Num1, i.Num2)
 }
 
 // ExecuteMath validates inputs and executes the calculation.
@@ -158,7 +160,7 @@ func (i LowestCommonMultipleAPI) ExecuteMath(data string) (string, error) {
 	if err := validatePositiveInt(i.Num1, i.Num2); err != nil {
 		return "", err
 	}
-	return LowestCommonMultiple(i.Num1, i.Num2)
+	return mathematics.LowestCommonMultiple(i.Num1, i.Num2)
 }
 
 /* Percentages category */
@@ -195,7 +197,7 @@ func (i ChangeByPercentageAPI) ExecuteMath(data string) (string, error) {
 	if err := validateFloat(false, i.Number, i.Percentage); err != nil {
 		return "", err
 	}
-	return ChangeByPercentage(i.Number, i.Percentage)
+	return mathematics.ChangeByPercentage(i.Number, i.Percentage)
 }
 
 // ExecuteMath validates inputs and executes the calculation.
@@ -206,7 +208,7 @@ func (i NumberFromPercentageAPI) ExecuteMath(data string) (string, error) {
 	if err := validateFloat(false, i.Percentage, i.Number); err != nil {
 		return "", err
 	}
-	return NumberFromPercentage(i.Percentage, i.Number)
+	return mathematics.NumberFromPercentage(i.Percentage, i.Number)
 }
 
 // ExecuteMath validates inputs and executes the calculation.
@@ -217,7 +219,7 @@ func (i PercentageChangeAPI) ExecuteMath(data string) (string, error) {
 	if err := validateFloat(false, i.Number, i.NewNumber); err != nil {
 		return "", err
 	}
-	return PercentageChange(i.Number, i.NewNumber)
+	return mathematics.PercentageChange(i.Number, i.NewNumber)
 }
 
 // ExecuteMath validates inputs and executes the calculation.
@@ -228,7 +230,7 @@ func (i PercentageFromNumberAPI) ExecuteMath(data string) (string, error) {
 	if err := validateFloat(false, i.Number, i.TotalNumber); err != nil {
 		return "", err
 	}
-	return PercentageFromNumber(i.Number, i.TotalNumber)
+	return mathematics.PercentageFromNumber(i.Number, i.TotalNumber)
 }
 
 /* Total Surface Area category */
@@ -282,7 +284,7 @@ func (i TsaPythagoreanTheoremAPI) ExecuteMath(data string) (string, error) {
 	if err := validateFloat(true, i.SideA, i.SideB); err != nil {
 		return "", err
 	}
-	return TsaPythagoreanTheorem(i.SideA, i.SideB)
+	return mathematics.TsaPythagoreanTheorem(i.SideA, i.SideB)
 }
 
 // ExecuteMath validates inputs and executes the calculation.
@@ -293,7 +295,7 @@ func (i TsaConeAPI) ExecuteMath(data string) (string, error) {
 	if err := validateFloat(true, i.Radius, i.SlantHeight); err != nil {
 		return "", err
 	}
-	return TsaCone(i.Radius, i.SlantHeight)
+	return mathematics.TsaCone(i.Radius, i.SlantHeight)
 }
 
 // ExecuteMath validates inputs and executes the calculation.
@@ -304,7 +306,7 @@ func (i TsaCubeAPI) ExecuteMath(data string) (string, error) {
 	if err := validateFloat(true, i.Length); err != nil {
 		return "", err
 	}
-	return TsaCube(i.Length)
+	return mathematics.TsaCube(i.Length)
 }
 
 // ExecuteMath validates inputs and executes the calculation.
@@ -315,7 +317,7 @@ func (i TsaCylinderAPI) ExecuteMath(data string) (string, error) {
 	if err := validateFloat(true, i.Radius, i.Height); err != nil {
 		return "", err
 	}
-	return TsaCylinder(i.Radius, i.Height)
+	return mathematics.TsaCylinder(i.Radius, i.Height)
 }
 
 // ExecuteMath validates inputs and executes the calculation.
@@ -326,7 +328,7 @@ func (i TsaRectangularPrismAPI) ExecuteMath(data string) (string, error) {
 	if err := validateFloat(true, i.Height, i.Length, i.Width); err != nil {
 		return "", err
 	}
-	return TsaRectangularPrism(i.Height, i.Length, i.Width)
+	return mathematics.TsaRectangularPrism(i.Height, i.Length, i.Width)
 }
 
 // ExecuteMath validates inputs and executes the calculation.
@@ -337,7 +339,7 @@ func (i TsaSphereAPI) ExecuteMath(data string) (string, error) {
 	if err := validateFloat(true, i.Radius); err != nil {
 		return "", err
 	}
-	return TsaSphere(i.Radius)
+	return mathematics.TsaSphere(i.Radius)
 }
 
 // ExecuteMath validates inputs and executes the calculation.
@@ -348,5 +350,5 @@ func (i TsaSquareBaseTriangleAPI) ExecuteMath(data string) (string, error) {
 	if err := validateFloat(true, i.BaseLength, i.Height); err != nil {
 		return "", err
 	}
-	return TsaSquareBaseTriangle(i.BaseLength, i.Height)
+	return mathematics.TsaSquareBaseTriangle(i.BaseLength, i.Height)
 }

@@ -1,4 +1,4 @@
-package model
+package api
 
 import "html/template"
 
@@ -13,8 +13,8 @@ type Category struct {
 // Calculation holds information about a calculation
 type Calculation struct {
 	Name         string             `json:"name"`         // name of the calculation
-	Description  string             `json:"description"`  // description of the calculation
 	Slug         string             `json:"slug"`         // slug of the calculation
+	Description  string             `json:"description"`  // description of the calculation
 	InputInfo    []CalculationInput `json:"inputInfo"`    // contains the names of the inputs and their json tags
 	Example      template.HTML      `json:"example"`      // example of output of calculation calculation function
 	Category     string             `json:"category"`     // the name of the category the calculation belongs to
