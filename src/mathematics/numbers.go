@@ -149,6 +149,7 @@ func HighestCommonFactor(n1 int, n2 int) (string, error) {
 	answer := 1
 	var sharedPrimesBuf strings.Builder
 	var sharedPrimesProofBuf strings.Builder
+	var sharedPrimesProof string
 	if len(commonNumbers) != 0 {
 		// shared primes
 		for _, n := range commonNumbers {
@@ -160,13 +161,16 @@ func HighestCommonFactor(n1 int, n2 int) (string, error) {
 			fmt.Fprintf(&sharedPrimesProofBuf, "%d &times ", n)
 			answer *= n
 		}
+		sharedPrimesProof = fmt.Sprintf("%s = %d", strings.TrimSuffix(sharedPrimesProofBuf.String(),
+			" &times "), answer)
 	} else {
-		fmt.Fprint(&sharedPrimesBuf, "There are no shared factors.")
+		message := "There are no shared factors."
+		fmt.Fprint(&sharedPrimesBuf, message)
+		fmt.Fprint(&sharedPrimesProofBuf, message)
+		sharedPrimesProof = sharedPrimesProofBuf.String()
 	}
 	// sharedPrimes might have ", " at the end
 	sharedPrimes := strings.TrimSuffix(sharedPrimesBuf.String(), ", ")
-	sharedPrimesProof := fmt.Sprintf("%s = %d", strings.TrimSuffix(sharedPrimesProofBuf.String(),
-		" &times "), answer)
 
 	data := struct {
 		FirstNumber       int
