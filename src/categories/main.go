@@ -10,8 +10,8 @@ import (
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
-	"github.com/ludw1gj/mathfever/src/api"
-	"github.com/ludw1gj/mathfever/src/categories/config"
+	"github.com/ludw1gj/mathfever-api/src/api"
+	"github.com/ludw1gj/mathfever-api/src/categories/config"
 )
 
 func Handler(request events.APIGatewayProxyRequest) (api.Response, error) {

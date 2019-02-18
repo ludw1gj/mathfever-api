@@ -3,7 +3,7 @@ package api
 import (
 	"encoding/json"
 
-	"github.com/ludw1gj/mathfever/src/mathematics"
+	"github.com/ludw1gj/mathfever-api/src/mathematics"
 )
 
 // Mathematics type is for standardising the execution of calculation functions.

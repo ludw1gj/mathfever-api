@@ -1,4 +1,4 @@
-module github.com/ludw1gj/mathfever
+module github.com/ludw1gj/mathfever-api
 
 require (
 	github.com/aws/aws-lambda-go v1.8.2
