@@ -76,7 +76,8 @@ func findPrimeFactors(n int) (primeFactors []int, table string, proof string,
 		var tableBuf strings.Builder
 
 		fmt.Fprint(&tableBuf, `
-		<table class="mdl-data-table mdl-js-data-table">
+		<div class="legacy-table">
+		<table class="table">
 		<tbody>`)
 		for i := 2; i*i <= num; {
 			if num%i == 0 {
@@ -84,8 +85,8 @@ func findPrimeFactors(n int) (primeFactors []int, table string, proof string,
 				fmt.Fprintf(&tableBuf, `
 			<tr>
 				<td>%d | %d</td>
-				<td class="column-wrap mdl-data-table__cell--non-numeric">%d is a factor of %d</td>
-				<td class="column-wrap mdl-data-table__cell--non-numeric">%d divided by %d is %d</td>
+				<td>%d is a factor of %d</td>
+				<td>%d divided by %d is %d</td>
 			</tr>`, num, i, i, num, num, i, num/i)
 
 				num /= i
@@ -98,19 +99,19 @@ func findPrimeFactors(n int) (primeFactors []int, table string, proof string,
 			primes = append(primes, num)
 			fmt.Fprintf(&tableBuf, `
 			<tr>
-			<td>%d | %d</td>
-			<td class="column-wrap mdl-data-table__cell--non-numeric">%d is a factor of %d</td>
-			<td class="column-wrap mdl-data-table__cell--non-numeric">%d divided by %d is %d</td>
+				<td>%d | %d</td>
+				<td>%d is a factor of %d</td>
+				<td>%d divided by %d is %d</td>
 			</tr>`, num, num, num, num, num, num, 1)
 		}
 
 		fmt.Fprint(&tableBuf, `
 		<tr>
-		<td>1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-		<td></td>
-		<td></td>
+			<td>1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td></td>
+			<td></td>
 		</tr>
-		</tbody></table>`)
+		</tbody></table></div>`)
 		return primes, tableBuf.String()
 	}
 
@@ -203,9 +204,9 @@ func HighestCommonFactor(n1 int, n2 int) (string, error) {
 
 	<h4>Here's the working out:</h4>
 	<p>Finding all prime factors of {{.FirstNumber}}:</p>
-	{{.Table1}}
+		{{.Table1}}
 	<p>Finding all prime factors of {{.SecondNumber}}:</p>
-	{{.Table2}}
+		{{.Table2}}
 	<p>Prime factors for the first number are:<br>
 		{{.Proof1}}</p>
 	<p>Prime factors for the second number are:<br>
@@ -284,9 +285,9 @@ func LowestCommonMultiple(n1 int, n2 int) (string, error) {
 
 	<h4>Here's the working out:</h4>
 	<p>Finding all prime factors of {{.FirstNumber}}:</p>
-	{{.Table1}}
+		{{.Table1}}
 	<p>Finding all prime factors of {{.SecondNumber}}:</p>
-	{{.Table2}}
+		{{.Table2}}
 	<p>Prime factors for the first number are:<br>
 		{{.Proof1}}</p>
 	<p>Prime factors for the second number are:<br>
