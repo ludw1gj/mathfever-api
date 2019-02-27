@@ -51,13 +51,13 @@ func BinaryToDecimal(binary string) (string, error) {
 	}
 
 	const tpl = `
-	<h6>Question:</h6>
+	<h4>Question:</h4>
 	<p>What is {{.Binary}} in decimal?</p>
 
-	<h6>Answer:</h6>
+	<h4>Answer:</h4>
 	<p>The binary number <b>{{.Binary}}</b> in decimal is <b>{{.Answer}}</b>.</p>
 
-	<h6>Here's how to convert it:</h6>
+	<h4>Here's how to convert it:</h4>
 	<p>Using the following continuing equation the accurate answer can be found: 
 		(b x 2<sup>n</sup>)...<br>
 		Where <strong>b</strong> is the binary number at the n<sup>th</sup> position and 
@@ -70,7 +70,7 @@ func BinaryToDecimal(binary string) (string, error) {
 		{{range .Proof}}{{.}}<br>{{end}}
 		<span class="word-break">{{.Answer}}</span></p>
 
-	<h6>Therefore:</h6>
+	<h4>Therefore:</h4>
 	<p class="word-break">({{.Binary}})<sub>2</sub> = ({{.Answer}})<sub>10</sub></p>`
 
 	return parseTemplate(tpl, data)
@@ -120,13 +120,13 @@ func BinaryToHexadecimal(binary string) (string, error) {
 	}
 
 	const tpl = `
-	<h6>Question:</h6>
+	<h4>Question:</h4>
 	<p>What is {{.Binary}} in hexadecimal?</p>
 
-	<h6>Answer:</h6>
+	<h4>Answer:</h4>
 	<p>The binary number <b>{{.Binary}}</b> in hexadecimal is <b>{{.Answer}}</b>.</p>
 
-	<h6>Here's how to convert it:</h6>
+	<h4>Here's how to convert it:</h4>
 	<p>Break the binary number <span class="word-break">{{.Binary}}</span> into groups of 4 digits as 
 		such:<br>
 		{{range .GroupedBinary}}{{.}}{{end}}</p>
@@ -136,7 +136,7 @@ func BinaryToHexadecimal(binary string) (string, error) {
 		rel="noopener noreferrer" target="_blank">here</a>.<br>
 		{{.Proof}}</p>
 
-	<h6>Therefore:</h6>
+	<h4>Therefore:</h4>
 	<p class="word-break">({{.Binary}})<sub>2</sub> = ({{.Answer}})<sub>16</sub></p>`
 
 	return parseTemplate(tpl, data)
@@ -200,14 +200,14 @@ func decimalToBinaryHexadecimal(decimal int, base int) (string, error) {
 	}
 
 	const tpl = `
-	<h6>Question:</h6>
+	<h4>Question:</h4>
 	<p>What is {{.Decimal}} in {{if eq .Base 2}}binary{{else}}hexadecimal{{end}}?</p>
 
-	<h6>Answer:</h6>
+	<h4>Answer:</h4>
 	<p>The decimal number <b>{{.Decimal}}</b> in {{if eq .Base 2}}binary{{else}}hexadecimal{{end}} is 
 		<b>{{.Answer}}</b>.</p>
 
-	<h6>Here's how to convert it:</h6>
+	<h4>Here's how to convert it:</h4>
 	<p>Divide the decimal number by {{.Base}} and record the remainder:<br>
 		{{.Proof}}</p>
 	<p>Join the remainders from last to first:<br>
@@ -221,7 +221,7 @@ func decimalToBinaryHexadecimal(decimal int, base int) (string, error) {
 		{{- end}}</p>
 	{{- end}}
 
-	<h6>Therefore:</h6>
+	<h4>Therefore:</h4>
 	<p class="word-break">({{.Decimal}})<sub>10</sub> = (<span class="word-break">{{.Answer}}</span>)
 		<sub>{{.Base}}</sub></p>`
 
@@ -269,13 +269,13 @@ func HexadecimalToBinary(hexadecimal string) (string, error) {
 	}
 
 	const tpl = `
-	<h6>Question:</h6>
+	<h4>Question:</h4>
 	<p>What is {{.Hexadecimal}} in binary?</p>
 
-	<h6>Answer:</h6>
+	<h4>Answer:</h4>
 	<p>The hexadecimal number <b>{{.Hexadecimal}}</b> in binary is <b>{{.Answer}}</b>.</p>
 
-	<h6>Here's how to convert it:</h6>
+	<h4>Here's how to convert it:</h4>
 	<p>Convert each hexadecimal digit manually to its binary equivalent:<br>
 		Refer to the Conversion Table <a href="/category/networking/conversion-table"
 		rel="noopener noreferrer" target="_blank">here</a>.<br>
@@ -283,7 +283,7 @@ func HexadecimalToBinary(hexadecimal string) (string, error) {
 	<p>Join the digit equivalents together from first to last:<br>
 		{{.Answer}}</p>
 
-	<h6>Therefore:</h6>
+	<h4>Therefore:</h4>
 	<p>({{.Hexadecimal}})<sub>16</sub> = ({{.Answer}})<sub>2</sub></p>`
 
 	return parseTemplate(tpl, data)
@@ -337,13 +337,13 @@ func HexadecimalToDecimal(hexadecimal string) (string, error) {
 	}
 
 	const tpl = `
-	<h6>Question:</h6>
+	<h4>Question:</h4>
 	<p>What is {{.Hexadecimal}} in decimal?</p>
 
-	<h6>Answer:</h6>
+	<h4>Answer:</h4>
 	<p>The hexadecimal number <b>{{.Hexadecimal}}</b> in decimal is <b>{{.Answer}}</b>.</p>
 
-	<h6>Here's how to convert it:</h6>
+	<h4>Here's how to convert it:</h4>
 	<p>Get the decimal equivalent of each hexadecimal digit:<br>
 		Refer to the Conversion Table <a href="/category/networking/conversion-table"
 		rel="noopener noreferrer" target="_blank">here</a>.<br>
@@ -352,7 +352,7 @@ func HexadecimalToDecimal(hexadecimal string) (string, error) {
 		zero, right to left:<br>
 		{{range .Proof2}}{{.}}{{end}}</p>
 
-	<h6>Therefore:</h6>
+	<h4>Therefore:</h4>
 	<p class="word-break">({{.Hexadecimal}})<sub>16</sub> = ({{.Answer}})<sub>10</sub></p>`
 
 	return parseTemplate(tpl, data)

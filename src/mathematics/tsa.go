@@ -44,13 +44,13 @@ func TsaPythagoreanTheorem(a float64, b float64) (string, error) {
 	}
 
 	const tpl = `
-	<h6>Question:</h6>
+	<h4>Question:</h4>
 	<p>Where a = {{.A}} and b = {{.B}}, find c (hypotenuse).</p>
 
-	<h6>Answer:</h6>
+	<h4>Answer:</h4>
 	<p>c is equal to {{.Answer}}.</p>
 
-	<h6>Here's how to calculate it:</h6>
+	<h4>Here's how to calculate it:</h4>
 	<p>The Pythagorean theorem, also known as Pythagoras's theorem, can be used when two sides of a 
 		right angled triangle are known, and then we can find the third by using the equation:<br>
 		a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup></p>
@@ -64,7 +64,7 @@ func TsaPythagoreanTheorem(a float64, b float64) (string, error) {
 		&radic;{{.AB}} = &radic;c<sup>2</sup><br>
 		c = {{.Answer}}</p>
 
-	<h6>Therefore:</h6>
+	<h4>Therefore:</h4>
 	<p>c is equal to {{.Answer}}.</p>`
 
 	return parseTemplate(tpl, data)
@@ -98,16 +98,16 @@ func TsaCone(radius float64, slantHeight float64) (string, error) {
 	}
 
 	const tpl = `
-	<h6>Question:</h6>
+	<h4>Question:</h4>
 	<p>Where r (radius) is {{.Radius}}, and S (slant height) is {{.SlantHeight}}, find the total 
 		surface area of a cone.</p>
 	
-	<h6>Answer:</h6>
+	<h4>Answer:</h4>
 	<p>The total surface area of a cone with the radius of {{.Radius}} and a slant height of 
 		{{.SlantHeight}} is {{.TSA}}.</p>
 	
 	
-	<h6>Here's how to calculate it:</h6>
+	<h4>Here's how to calculate it:</h4>
 	<p>Find the Total Surface Area of a cone, with the equation:<br>
 		TSA = tsa of the base (circle) + tsa of the curved surface<br>
 		TSA = π r<sup>2</sup> + π rS<br>
@@ -125,7 +125,7 @@ func TsaCone(radius float64, slantHeight float64) (string, error) {
 		{{.BaseArea}} + {{.CurvedSurfaceArea}}<br>
 		{{.TSA}}</p>
 	
-	<h6>Therefore:</h6>
+	<h4>Therefore:</h4>
 	<p>The total surface area of a cone with the radius of {{.Radius}} and a slant height of 
 		{{.SlantHeight}} equals {{.TSA}}.</p>`
 
@@ -152,13 +152,13 @@ func TsaCube(length float64) (string, error) {
 	}
 
 	const tpl = `
-	<h6>Question:</h6>
+	<h4>Question:</h4>
 	<p>Where the length is {{.Length}}, find the total surface area of a cube.</p>
 	
-	<h6>Answer:</h6>
+	<h4>Answer:</h4>
 	<p>The total surface area of a cube with the length of {{.Length}} is {{.TSA}}.</p>
 	
-	<h6>Here's how to calculate it:</h6>
+	<h4>Here's how to calculate it:</h4>
 	<p>Find the Total Surface Area of a cube, with the equation:<br>
 		TSA = 6L<sup>2</sup></p>
 	<p>L is the length of each side of the cube. The surface tsa of a single side is a square, thus L 
@@ -169,7 +169,7 @@ func TsaCube(length float64) (string, error) {
 		TSA = 6 &times {{.LengthSqr}}<br>
 		TSA = {{.TSA}}</p>
 	
-	<h6>Therefore:</h6>
+	<h4>Therefore:</h4>
 	<p>The total surface area of a cube with the length of {{.Length}} equals {{.TSA}}.</p>`
 
 	return parseTemplate(tpl, data)
@@ -208,15 +208,15 @@ func TsaCylinder(radius float64, height float64) (string, error) {
 	}
 
 	const tpl = `
-	<h6>Question:</h6>
+	<h4>Question:</h4>
 	<p>Where the radius is {{.Radius}} and the height is {{.Height}}, find the total surface area of 
 		a cylinder.</p>
 	
-	<h6>Answer:</h6>
+	<h4>Answer:</h4>
 	<p>The total surface area of a cylinder with the radius of {{.Radius}}, and a height of 
 			{{.Height}} is {{.TSA}}.</p>
 	
-	<h6>Here's how to calculate it:</h6>
+	<h4>Here's how to calculate it:</h4>
 	<p>Find the Total Surface Area of a cylinder, with the equation:<br>
 		TSA = tsa of 2 circles + tsa of curved surface<br>
 		TSA = 2 π r<sup>2</sup> + 2 π rh</p>
@@ -238,7 +238,7 @@ func TsaCylinder(radius float64, height float64) (string, error) {
 		{{.CirclesArea}} + {{.CurvedSurfaceArea}}<br>
 		{{.TSA}}</p>
 	
-	<h6>Therefore:</h6>
+	<h4>Therefore:</h4>
 	<p>The total surface area of a cylinder with the radius of {{.Radius}}, and a height of 
 		{{.Height}} equals {{.TSA}}.</p>`
 
@@ -270,15 +270,15 @@ func TsaRectangularPrism(height float64, length float64, width float64) (string,
 	}
 
 	const tpl = `
-	<h6>Question:</h6>
+	<h4>Question:</h4>
 	<p>Where the height is {{.Height}}, the length is {{.Length}}, and the width is {{.Width}}, find 
 		the total surface area of a rectangular prism.</p>
 	
-	<h6>Answer:</h6>
+	<h4>Answer:</h4>
 	<p>The total surface area of a rectangular prism with the height of {{.Height}}, a length of 
 		{{.Length}}, and a width of {{.Width}} is {{.TSA}}.</p>
 	
-	<h6>Here's how to calculate it:</h6>
+	<h4>Here's how to calculate it:</h4>
 	<p>Find the Total Surface Area of a rectangular prism, with the equation:<br>
 		TSA = 2(WH + LW + LH)</p>
 	<p>A rectangular prism has a surface tsa of six rectangles. Two sides of each: width &times 
@@ -290,7 +290,7 @@ func TsaRectangularPrism(height float64, length float64, width float64) (string,
 		TSA = 2({{.Add}})<br>
 		TSA = {{.TSA}}</p>
 	
-	<h6>Therefore:</h6>
+	<h4>Therefore:</h4>
 	<p>The total surface area of a rectangular prism with the height of {{.Height}}, a length of 
 		{{.Length}}, and a width of {{.Width}} is equal to {{.TSA}}.</p>`
 
@@ -314,13 +314,13 @@ func TsaSphere(radius float64) (string, error) {
 	}
 
 	const tpl = `
-	<h6>Question:</h6>
+	<h4>Question:</h4>
 	<p>Where the r (radius) is {{.Radius}}, find the total surface area of a sphere.</p>
 
-	<h6>Answer:</h6>
+	<h4>Answer:</h4>
 	<p>The total surface area of a sphere with the radius of {{.Radius}} equals {{.TSA}}.</p>
 
-	<h6>Here's how to calculate it:</h6>
+	<h4>Here's how to calculate it:</h4>
 	<p>Find the Total Surface Area of a sphere, with the equation:<br>
 		TSA = 4 &#928; r<sup>2</sup></p>
 	<p>r is the radius of the sphere.</p>
@@ -328,7 +328,7 @@ func TsaSphere(radius float64) (string, error) {
 		TSA = 4 &times &#928; &times {{.Radius}}<sup>2</sup><br>
 		TSA = {{.TSA}}</p>
 
-	<h6>Therefore:</h6>
+	<h4>Therefore:</h4>
 	<p>The total surface area of a sphere with the radius of {{.Radius}} equals {{.TSA}}.</p>`
 
 	return parseTemplate(tpl, data)
@@ -362,15 +362,15 @@ func TsaSquareBaseTriangle(baseLength float64, height float64) (string, error) {
 	}
 
 	const tpl = `
-	<h6>Question:</h6>
+	<h4>Question:</h4>
 	<p>Where the base length is {{.BaseLength}}, and the height is {{.Height}}, find the total surface
 		area of a square based	triangle.</p>
 
-	<h6>Answer:</h6>
+	<h4>Answer:</h4>
 	<p>The total surface area of a square based triangle with the base length of {{.BaseLength}}, and
 		a height is {{.Height}} is {{.TSA}}.</p>
 
-	<h6>Here's how to calculate it:</h6>
+	<h4>Here's how to calculate it:</h4>
 	<p>Find the Total Surface Area of a square based triangle, with the equation:<br>
 		TSA = tsa of the square + tsa of 4 triangles<br>
 		TSA = b<sup>2</sup> + 4 &times (1/2bh)<br>
@@ -390,7 +390,7 @@ func TsaSquareBaseTriangle(baseLength float64, height float64) (string, error) {
 		{{.SquareArea}} + {{.FourTrianglesArea}}<br>
 		{{.TSA}}</p>
 
-	<h6>Therefore:</h6>
+	<h4>Therefore:</h4>
 	<p>The total surface area of a square based triangle with the base length of {{.BaseLength}}, and
 			a height is {{.Height}} equals {{.TSA}}.</p>`
 

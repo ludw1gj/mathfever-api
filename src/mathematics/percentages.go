@@ -39,14 +39,14 @@ func ChangeByPercentage(n float64, p float64) (string, error) {
 	}
 
 	const tpl = `
-	<h6>Question:</h6>
+	<h4>Question:</h4>
 	<p>Where the {{.Noun}} in percentage is {{.Percentage}}% and the number is {{.Number}}, find the 
 		resulting number.</p>
 
-	<h6>Answer:</h6>
+	<h4>Answer:</h4>
 	<p>The number {{.Number}} {{.Noun}}d by {{.Percentage}}% is {{.Answer}}.</p>
 
-	<h6>Here's how to calculate it:</h6>
+	<h4>Here's how to calculate it:</h4>
 	<p>Calculate using the equation shown below:<br>
 		(Number &#xf7; 100) &times Percentage + Number<br>
 		({{.Number}} &#xf7; 100) &times {{.Percentage}} + {{.Number}}</p>
@@ -64,7 +64,7 @@ func ChangeByPercentage(n float64, p float64) (string, error) {
 		{{.AddValue}} + {{.Number}}<br>
 		{{.Answer}}</p>
 
-	<h6>Therefore:</h6>
+	<h4>Therefore:</h4>
 	<p>{{.Number}} {{.Noun}}d by {{.Percentage}}% is {{.Answer}}.</p>`
 
 	return parseTemplate(tpl, data)
@@ -93,14 +93,14 @@ func NumberFromPercentage(p float64, n float64) (string, error) {
 	}
 
 	const tpl = `
-	<h6>Question:</h6>
+	<h4>Question:</h4>
 	<p>Where the percentage is {{.Percentage}}% and the number is {{.Number}}, find the resulting 
 		number of the percentage.</p>
 
-	<h6>Answer:</h6>
+	<h4>Answer:</h4>
 	<p>{{.Percentage}}% of {{.Number}} is {{.Answer}}.</p>
 
-	<h6>Here's how to calculate it:</h6>
+	<h4>Here's how to calculate it:</h4>
 	<p>Use the equation below:<br>
 		(Percentage &#xf7; 100) &times Number<br>
 		({{.Percentage}} &#xf7; 100) &times {{.Number}}</p>
@@ -113,7 +113,7 @@ func NumberFromPercentage(p float64, n float64) (string, error) {
 		({{.Divided}}) &times {{.Number}}<br>
 		{{.Answer}}</p>
 
-	<h6>Therefore:</h6>
+	<h4>Therefore:</h4>
 	<p>{{.Percentage}}% of {{.Number}} is {{.Answer}}.</p>`
 
 	return parseTemplate(tpl, data)
@@ -145,14 +145,14 @@ func PercentageChange(n float64, newN float64) (string, error) {
 	}
 
 	const tpl = `
-	<h6>Question:</h6>
+	<h4>Question:</h4>
 	<p>Where original number is {{.Number}} and the new number is {{.NewNumber}}, find the difference 
 		between the numbers in percentage.</p>
 
-	<h6>Answer:</h6>
+	<h4>Answer:</h4>
 	<p>The difference in percentage between {{.Number}} and {{.NewNumber}} is {{.Answer}}%.</p>
 
-	<h6>Here's how to calculate it:</h6>
+	<h4>Here's how to calculate it:</h4>
 	<p>Calculate using the equation shown below:<br>
 		((New Number - Original Number) &#xf7; Original Number) &times 100<br>
 	<p>Find the change in value between the two numbers:<br>
@@ -167,7 +167,7 @@ func PercentageChange(n float64, newN float64) (string, error) {
 		{{.DecimalisedPercentage}} &times 100<br>
 		{{.Answer}}</p>
 
-	<h6>Therefore:</h6>
+	<h4>Therefore:</h4>
 	<p>The percentage of change from {{.Number}} to {{.NewNumber}} is {{.Answer}}%.</p>`
 
 	return parseTemplate(tpl, data)
@@ -196,14 +196,14 @@ func PercentageFromNumber(n float64, totalN float64) (string, error) {
 	}
 
 	const tpl = `
-	<h6>Question:</h6>
+	<h4>Question:</h4>
 	<p>Where the number is {{.Number}} and the total number is {{.TotalNumber}}, find how much 
 		percentage {{.Number}} is of {{.TotalNumber}}.</p>
 
-	<h6>Answer:</h6>
+	<h4>Answer:</h4>
 	<p>{{.Number}} is {{.Answer}}% of {{.TotalNumber}}.</p>
 
-	<h6>Here's how to calculate it:</h6>
+	<h4>Here's how to calculate it:</h4>
 	<p>Calculate using the equation shown below:<br>
 		(Number &#xf7; Total Number) &times 100</p>
 	<p>Find the decimalised version of the percentage:<br>
@@ -214,7 +214,7 @@ func PercentageFromNumber(n float64, totalN float64) (string, error) {
 		{{.DecimalisedPercentage}} &times 100<br>
 		{{.Answer}}</p>
 
-	<h6>Therefore:</h6>
+	<h4>Therefore:</h4>
 	<p>{{.Number}} is {{.Answer}}% of {{.TotalNumber}}.</p>`
 
 	return parseTemplate(tpl, data)

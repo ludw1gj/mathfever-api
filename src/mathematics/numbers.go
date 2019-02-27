@@ -42,13 +42,13 @@ func IsPrime(n int) (string, error) {
 	}
 
 	const tpl = `
-	<h6>Question:</h6>
+	<h4>Question:</h4>
 	<p>Is {{.Number}} a prime number?</p>
 
-	<h6>Answer:</h6>
+	<h4>Answer:</h4>
 	<p>{{.Answer}}</p>
 
-	<h6>Helpful Tips:</h6>
+	<h4>Helpful Tips:</h4>
 	<p>Prime numbers are numbers whose only whole-number factors are 1 and itself.</p>
 	<p>To determine if a number (n) is a prime number, here are some rules:</p>
 	<ul>
@@ -195,13 +195,13 @@ func HighestCommonFactor(n1 int, n2 int) (string, error) {
 	}
 
 	const tpl = `
-	<h6>Question:</h6>
+	<h4>Question:</h4>
 	<p>Find the highest common factor of {{.FirstNumber}} and {{.SecondNumber}}.</p>
 
-	<h6>Answer:</h6>
+	<h4>Answer:</h4>
 	<p>The highest common factor of {{.FirstNumber}} and {{.SecondNumber}} is {{.Answer}}.</p>
 
-	<h6>Here's the working out:</h6>
+	<h4>Here's the working out:</h4>
 	<p>Finding all prime factors of {{.FirstNumber}}:</p>
 	{{.Table1}}
 	<p>Finding all prime factors of {{.SecondNumber}}:</p>
@@ -217,7 +217,7 @@ func HighestCommonFactor(n1 int, n2 int) (string, error) {
 		{{.SharedPrimesProof}}</p>
 	{{end}}
 
-	<h6>Therefore:</h6>
+	<h4>Therefore:</h4>
 	<p>The highest common factor of {{.FirstNumber}} and {{.SecondNumber}} is {{.Answer}}.</p>`
 
 	return parseTemplate(tpl, data)
@@ -276,13 +276,13 @@ func LowestCommonMultiple(n1 int, n2 int) (string, error) {
 	}
 
 	const tpl = `
-	<h6>Question:</h6>
+	<h4>Question:</h4>
 	<p>Find the lowest common multiple of {{.FirstNumber}} and {{.SecondNumber}}.</p>
 
-	<h6>Answer:</h6>
+	<h4>Answer:</h4>
 	<p>The lowest common multiple of {{.FirstNumber}} and {{.SecondNumber}} is {{.Answer}}.</p>
 
-	<h6>Here's the working out:</h6>
+	<h4>Here's the working out:</h4>
 	<p>Finding all prime factors of {{.FirstNumber}}:</p>
 	{{.Table1}}
 	<p>Finding all prime factors of {{.SecondNumber}}:</p>
@@ -295,7 +295,7 @@ func LowestCommonMultiple(n1 int, n2 int) (string, error) {
 		<br>
 		{{.CompareProof}}</p>
 
-	<h6>Therefore:</h6>
+	<h4>Therefore:</h4>
 	<p>The lowest common multiple of {{.FirstNumber}} and {{.SecondNumber}} is {{.Answer}}.</p>`
 
 	return parseTemplate(tpl, data)
