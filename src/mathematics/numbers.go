@@ -76,8 +76,7 @@ func findPrimeFactors(n int) (primeFactors []int, table string, proof string,
 		var tableBuf strings.Builder
 
 		fmt.Fprint(&tableBuf, `
-		<div class="legacy-table">
-		<table class="table">
+		<table class="pure-table pure-table-bordered">
 		<tbody>`)
 		for i := 2; i*i <= num; {
 			if num%i == 0 {
@@ -111,7 +110,7 @@ func findPrimeFactors(n int) (primeFactors []int, table string, proof string,
 			<td></td>
 			<td></td>
 		</tr>
-		</tbody></table></div>`)
+		</tbody></table>`)
 		return primes, tableBuf.String()
 	}
 
