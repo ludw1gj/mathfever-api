@@ -123,7 +123,7 @@ func findPrimeFactors(n int) (primeFactors []int, table string, proof string,
 				fmt.Fprintf(&proofBuf, "%d &times ", factor)
 			}
 		}
-		fmt.Fprintf(&proofBuf, "= %d<br>", num)
+		fmt.Fprintf(&proofBuf, " = %d<br>", num)
 
 		for factor := range frequency {
 			fmt.Fprintf(&proofBuf, "%d<sup>%d</sup> &times ", factor, frequency[factor])
