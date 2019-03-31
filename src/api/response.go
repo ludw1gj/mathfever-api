@@ -49,13 +49,13 @@ func HandleErrorResponse(err error, msg string, code int) (Response, error) {
 		Error string `json:"error"`
 	}
 
-	newErr := fmt.Errorf("%v, %v", msg, err.Error())
+	newErr := fmt.Errorf("%v", err.Error())
 	jsonErrResp, err := json.Marshal(ErrorJSONResponse{Error: newErr.Error()})
 	if err != nil {
 		resp := Response{
 			IsBase64Encoded: true,
 			StatusCode:      500,
-			Body:            `{"error": "failed to marshal error response on server"}`,
+			Body:            `{"error": "Failed to marshal error response on server."}`,
 			Headers: map[string]string{
 				"Content-Type":                     "application/json",
 				"Access-Control-Allow-Origin":      "*",
