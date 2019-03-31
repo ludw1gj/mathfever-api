@@ -55,7 +55,12 @@ func HandleErrorResponse(err error, msg string, code int) (Response, error) {
 		resp := Response{
 			IsBase64Encoded: true,
 			StatusCode:      500,
-			Body:            "failed to marshal error response",
+			Body:            `{"error": "failed to marshal error response on server"}`,
+			Headers: map[string]string{
+				"Content-Type":                     "application/json",
+				"Access-Control-Allow-Origin":      "*",
+				"Access-Control-Allow-Credentials": "true",
+			},
 		}
 		return resp, nil
 	}
@@ -64,6 +69,11 @@ func HandleErrorResponse(err error, msg string, code int) (Response, error) {
 		IsBase64Encoded: true,
 		StatusCode:      code,
 		Body:            string(jsonErrResp),
+		Headers: map[string]string{
+			"Content-Type":                     "application/json",
+			"Access-Control-Allow-Origin":      "*",
+			"Access-Control-Allow-Credentials": "true",
+		},
 	}
 	return resp, nil
 }
