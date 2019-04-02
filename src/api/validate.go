@@ -17,7 +17,7 @@ func validateBinary(binary string) error {
 }
 
 func validateInt(positiveOnly bool, numbers ...int) error {
-	const msg = "Please enter a valid decimal number, "
+	const msg = "Please enter a valid whole number, "
 	for _, n := range numbers {
 		if positiveOnly && n < 1 {
 			return fmt.Errorf("%vmust be greater than 0.", msg)
