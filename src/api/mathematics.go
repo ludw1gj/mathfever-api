@@ -72,7 +72,7 @@ func (i DecimalToBinaryAPI) ExecuteMath(data string) (string, error) {
 	if err := json.Unmarshal([]byte(data), &i); err != nil {
 		return "", err
 	}
-	if err := validatePositiveInt(i.Decimal); err != nil {
+	if err := validateInt(true, i.Decimal); err != nil {
 		return "", err
 	}
 	return mathematics.DecimalToBinary(i.Decimal)
@@ -83,7 +83,7 @@ func (i DecimalToHexadecimalAPI) ExecuteMath(data string) (string, error) {
 	if err := json.Unmarshal([]byte(data), &i); err != nil {
 		return "", err
 	}
-	if err := validatePositiveInt(i.Decimal); err != nil {
+	if err := validateInt(true, i.Decimal); err != nil {
 		return "", err
 	}
 	return mathematics.DecimalToHexadecimal(i.Decimal)
@@ -135,7 +135,7 @@ func (i IsPrimeAPI) ExecuteMath(data string) (string, error) {
 	if err := json.Unmarshal([]byte(data), &i); err != nil {
 		return "", err
 	}
-	if err := validatePositiveInt(i.Number); err != nil {
+	if err := validateInt(false, i.Number); err != nil {
 		return "", err
 	}
 	return mathematics.IsPrime(i.Number)
@@ -146,7 +146,7 @@ func (i HighestCommonFactorAPI) ExecuteMath(data string) (string, error) {
 	if err := json.Unmarshal([]byte(data), &i); err != nil {
 		return "", err
 	}
-	if err := validatePositiveInt(i.Num1, i.Num2); err != nil {
+	if err := validateInt(true, i.Num1, i.Num2); err != nil {
 		return "", err
 	}
 	return mathematics.HighestCommonFactor(i.Num1, i.Num2)
@@ -157,7 +157,7 @@ func (i LowestCommonMultipleAPI) ExecuteMath(data string) (string, error) {
 	if err := json.Unmarshal([]byte(data), &i); err != nil {
 		return "", err
 	}
-	if err := validatePositiveInt(i.Num1, i.Num2); err != nil {
+	if err := validateInt(true, i.Num1, i.Num2); err != nil {
 		return "", err
 	}
 	return mathematics.LowestCommonMultiple(i.Num1, i.Num2)
