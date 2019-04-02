@@ -109,15 +109,15 @@ func TsaCone(radius float64, slantHeight float64) (string, error) {
 	
 	<h4>Here's how to calculate it:</h4>
 	<p>Find the Total Surface Area of a cone, with the equation:<br>
-		TSA = tsa of the base (circle) + tsa of the curved surface<br>
+		TSA = surface area of the base (circle) + surface area of the curved surface<br>
 		TSA = π r<sup>2</sup> + π rS<br>
 	<p>r is the radius and S is the Slant Height.</p>
 	<p>Where r = {{.Radius}} and S = {{.SlantHeight}}:<br>
-		Find the tsa of the base:<br>
+		Find the surface area of the base:<br>
 		π r<sup>2</sup><br>
 		π &times {{.Radius}}<sup>2</sup><br>
 		{{.BaseArea}}</p>
-	<p>Find the tsa of the curved surface:<br>
+	<p>Find the surface area of the curved surface:<br>
 		π rS<br>
 		π &times {{.Radius}} &times {{.SlantHeight}}<br>
 		{{.CurvedSurfaceArea}}</p>
@@ -161,7 +161,7 @@ func TsaCube(length float64) (string, error) {
 	<h4>Here's how to calculate it:</h4>
 	<p>Find the Total Surface Area of a cube, with the equation:<br>
 		TSA = 6L<sup>2</sup></p>
-	<p>L is the length of each side of the cube. The surface tsa of a single side is a square, thus L 
+	<p>L is the length of each side of the cube. Each side is a square, thus L 
 		&times L, which is the same as L<sup>2</sup>. Since all of the sides are the same, and there
 		are 6 sides, you times L<sup>2</sup> by 6.</p>
 	<p>Where L = {{.Length}}:<br>
@@ -218,18 +218,18 @@ func TsaCylinder(radius float64, height float64) (string, error) {
 	
 	<h4>Here's how to calculate it:</h4>
 	<p>Find the Total Surface Area of a cylinder, with the equation:<br>
-		TSA = tsa of 2 circles + tsa of curved surface<br>
+		TSA = total surface area of 2 circles + total surface area of curved surface<br>
 		TSA = 2 π r<sup>2</sup> + 2 π rh</p>
 	<p>r is the radius and h is the height. A cylinder consists of two circles and a curved surface. 
-		Find the tsa of one of the circles and multiply that by 2, find the the tsa of the curved 
+		Find the total surface area of one of the circles and multiply that by 2, find the the total surface area of the curved 
 		surface, and then add those two together.</p>
 	<p>Where r = {{.Radius}}, and h = {{.Height}}:<br>
-		Find the tsa of the two circles:<br>
+		Find the total surface area of the two circles:<br>
 		2 π r<sup>2</sup><br>
 		2 &times π &times {{.Radius}}<sup>2</sup><br>
 		2 &times π &times {{.RadiusSqr}}<br>
 		{{.CirclesArea}}</p>
-	<p>Find the tsa of curved surface:<br>
+	<p>Find the total surface area of curved surface:<br>
 		2 π rh<br>
 		2 &times π &times {{.Radius}} &times {{.Height}}<br>
 		2 &times π &times {{.RH}}<br>
@@ -281,7 +281,7 @@ func TsaRectangularPrism(height float64, length float64, width float64) (string,
 	<h4>Here's how to calculate it:</h4>
 	<p>Find the Total Surface Area of a rectangular prism, with the equation:<br>
 		TSA = 2(WH + LW + LH)</p>
-	<p>A rectangular prism has a surface tsa of six rectangles. Two sides of each: width &times 
+	<p>A rectangular prism has a surface of six rectangles. Two sides of each: width &times 
 		height, length &times width, and length &times height. That would be 2WH + 2LW + 2LH, which 
 		would be the same as 2(WH + LW + LH).</p>
 	<p>Where H = 2, L = 4, W = 3:<br>
@@ -372,7 +372,7 @@ func TsaSquareBaseTriangle(baseLength float64, height float64) (string, error) {
 
 	<h4>Here's how to calculate it:</h4>
 	<p>Find the Total Surface Area of a square based triangle, with the equation:<br>
-		TSA = tsa of the square + tsa of 4 triangles<br>
+		TSA = surface area of the square + surface area of 4 triangles<br>
 		TSA = b<sup>2</sup> + 4 &times (1/2bh)<br>
 		TSA = b<sup>2</sup> + 2bh</p>
 
