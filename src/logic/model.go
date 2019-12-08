@@ -1,4 +1,4 @@
-package api
+package logic
 
 import "html/template"
 
@@ -19,6 +19,14 @@ type Calculation struct {
 	Example      template.HTML      `json:"example"`      // example of output of calculation calculation function
 	Category     string             `json:"category"`     // the name of the category the calculation belongs to
 	CategorySlug string             `json:"categorySlug"` // the slug of the category the calculation belongs to
+}
+
+// CalculationShort is needed for getting slugs
+type CalculationShort struct {
+	Name     string      // name of the calculation
+	Slug     string      // slug of the calculation
+	Math     Mathematics // math struct
+	Category string      // the name of the category the calculation belongs to
 }
 
 // CalculationInput describes an input name and input json field of a calculation.
