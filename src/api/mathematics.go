@@ -1,4 +1,4 @@
-package logic
+package api
 
 import (
 	"encoding/json"
@@ -6,8 +6,8 @@ import (
 	"github.com/ludw1gj/mathfever-api/src/mathematics"
 )
 
-// Mathematics type is for standardising the execution of calculation functions.
-type Mathematics interface {
+// MatheFunc type is for standardising the execution of calculation functions.
+type MatheFunc interface {
 	// ExecuteMath returns a calculation function's string output and an error
 	// if validation or template error occurs.
 	ExecuteMath(data string) (string, error)

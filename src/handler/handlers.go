@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/aws/aws-lambda-go/events"
-	"github.com/ludw1gj/mathfever-api/src/logic"
+	"github.com/ludw1gj/mathfever-api/src/api"
 	"strings"
 )
 
@@ -18,12 +18,12 @@ type ErrorJSONResponse struct {
 }
 
 func CategoriesHandler(_ *events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	return handleResponse(logic.GetCategoriesJson())
+	return handleResponse(api.GetCategoriesJson())
 }
 
 func CalculationHandler(request *events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	calculationSlug := strings.Replace(request.Path, "/calculation/", "", 1)
-	calculation, err := logic.FindMath(calculationSlug)
+	calculation, err := api.FindMath(calculationSlug)
 	if err != nil {
 		return handleErrorResponse(err, "invalid slug", 404)
 	}

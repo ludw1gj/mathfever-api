@@ -1,4 +1,4 @@
-package logic
+package api
 
 import "html/template"
 
@@ -23,10 +23,10 @@ type Calculation struct {
 
 // CalculationShort is needed for getting slugs
 type CalculationShort struct {
-	Name     string      // name of the calculation
-	Slug     string      // slug of the calculation
-	Math     Mathematics // math struct
-	Category string      // the name of the category the calculation belongs to
+	Name     string    // name of the calculation
+	Slug     string    // slug of the calculation
+	Math     MatheFunc // math struct
+	Category string    // the name of the category the calculation belongs to
 }
 
 // CalculationInput describes an input name and input json field of a calculation.

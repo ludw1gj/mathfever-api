@@ -1,4 +1,4 @@
-package logic
+package api
 
 import (
 	"errors"
@@ -249,141 +249,141 @@ const categoriesJson = `[
   }
 ]`
 
+var calculations = []CalculationShort{
+	// Networking
+	{
+		Name:     "Binary to Decimal",
+		Slug:     "binary-to-decimal",
+		Math:     BinaryToDecimalAPI{},
+		Category: "Networking",
+	},
+	{
+		Name:     "Binary to Hexadecimal",
+		Slug:     "binary-to-hexadecimal",
+		Math:     BinaryToHexadecimalAPI{},
+		Category: "Networking",
+	},
+	{
+		Name:     "Decimal to Binary",
+		Slug:     "decimal-to-binary",
+		Math:     DecimalToBinaryAPI{},
+		Category: "Networking",
+	},
+	{
+		"Decimal to Hexadecimal",
+		"decimal-to-hexadecimal",
+		DecimalToHexadecimalAPI{},
+		"Networking",
+	},
+	{
+		"Hexadecimal to Binary",
+		"hexadecimal-to-binary",
+		HexadecimalToBinaryAPI{},
+		"Networking",
+	},
+	{
+		"Hexadecimal to Decimal",
+		"hexadecimal-to-decimal",
+		HexadecimalToDecimalAPI{},
+		"Networking",
+	},
+
+	// Numbers
+	{
+		"Find if Number is a Prime Number",
+		"is-prime",
+		IsPrimeAPI{},
+		"Primes and Factors",
+	},
+	{
+		"Highest Common Factor",
+		"highest-common-factor",
+		HighestCommonFactorAPI{},
+		"Primes and Factors",
+	},
+	{
+		"Lowest Common Multiple",
+		"lowest-common-multiple",
+		LowestCommonMultipleAPI{},
+		"Primes and Factors",
+	},
+
+	// Percentages
+	{
+		"Change Number by Percentage",
+		"change-number-by-percentage",
+		ChangeByPercentageAPI{},
+		"Percentages",
+	},
+	{
+		"Get Number from a Percentage",
+		"get-number-from-a-percentage",
+		NumberFromPercentageAPI{},
+		"Percentages",
+	},
+	{
+		"Find Percentage Difference of Two Numbers",
+		"find-percentage-difference-of-two-numbers",
+		PercentageChangeAPI{},
+		"Percentages",
+	},
+	{
+		"Find Percentage of a Number",
+		"find-percentages-of-a-number",
+		PercentageFromNumberAPI{},
+		"Percentages",
+	},
+
+	// Total Surface Area
+	{
+		"Pythagorean Theorem",
+		"pythagorean-theorem",
+		TsaPythagoreanTheoremAPI{},
+		"Total Surface Area",
+	},
+	{
+		"Cone",
+		"cone",
+		TsaConeAPI{},
+		"Total Surface Area",
+	},
+	{
+		"Cube",
+		"cube",
+		TsaCubeAPI{},
+		"Total Surface Area",
+	},
+	{
+		"Cylinder",
+		"cylinder",
+		TsaCylinderAPI{},
+		"Total Surface Area",
+	},
+	{
+		"Rectangular Prism",
+		"rectangular-prism",
+		TsaRectangularPrismAPI{},
+		"Total Surface Area",
+	},
+	{
+		"Sphere",
+		"sphere",
+		TsaSphereAPI{},
+		"Total Surface Area",
+	},
+	{
+		"Square Based Triangle",
+		"square-based-triangle",
+		TsaSquareBaseTriangleAPI{},
+		"Total Surface Area",
+	},
+}
+
 func GetCategoriesJson() string {
 	return categoriesJson
 }
 
-func FindMath(slug string) (Mathematics, error) {
-	calculations := []CalculationShort{
-		// Networking
-		{
-			Name:     "Binary to Decimal",
-			Slug:     "binary-to-decimal",
-			Math:     &BinaryToDecimalAPI{},
-			Category: "Networking",
-		},
-		{
-			Name:     "Binary to Hexadecimal",
-			Slug:     "binary-to-hexadecimal",
-			Math:     &BinaryToHexadecimalAPI{},
-			Category: "Networking",
-		},
-		{
-			Name:     "Decimal to Binary",
-			Slug:     "decimal-to-binary",
-			Math:     &DecimalToBinaryAPI{},
-			Category: "Networking",
-		},
-		{
-			"Decimal to Hexadecimal",
-			"decimal-to-hexadecimal",
-			&DecimalToHexadecimalAPI{},
-			"Networking",
-		},
-		{
-			"Hexadecimal to Binary",
-			"hexadecimal-to-binary",
-			&HexadecimalToBinaryAPI{},
-			"Networking",
-		},
-		{
-			"Hexadecimal to Decimal",
-			"hexadecimal-to-decimal",
-			&HexadecimalToDecimalAPI{},
-			"Networking",
-		},
-
-		// Numbers
-		{
-			"Find if Number is a Prime Number",
-			"is-prime",
-			&IsPrimeAPI{},
-			"Primes and Factors",
-		},
-		{
-			"Highest Common Factor",
-			"highest-common-factor",
-			&HighestCommonFactorAPI{},
-			"Primes and Factors",
-		},
-		{
-			"Lowest Common Multiple",
-			"lowest-common-multiple",
-			&LowestCommonMultipleAPI{},
-			"Primes and Factors",
-		},
-
-		// Percentages
-		{
-			"Change Number by Percentage",
-			"change-number-by-percentage",
-			&ChangeByPercentageAPI{},
-			"Percentages",
-		},
-		{
-			"Get Number from a Percentage",
-			"get-number-from-a-percentage",
-			&NumberFromPercentageAPI{},
-			"Percentages",
-		},
-		{
-			"Find Percentage Difference of Two Numbers",
-			"find-percentage-difference-of-two-numbers",
-			&PercentageChangeAPI{},
-			"Percentages",
-		},
-		{
-			"Find Percentage of a Number",
-			"find-percentages-of-a-number",
-			&PercentageFromNumberAPI{},
-			"Percentages",
-		},
-
-		// Total Surface Area
-		{
-			"Pythagorean Theorem",
-			"pythagorean-theorem",
-			&TsaPythagoreanTheoremAPI{},
-			"Total Surface Area",
-		},
-		{
-			"Cone",
-			"cone",
-			&TsaConeAPI{},
-			"Total Surface Area",
-		},
-		{
-			"Cube",
-			"cube",
-			&TsaCubeAPI{},
-			"Total Surface Area",
-		},
-		{
-			"Cylinder",
-			"cylinder",
-			&TsaCylinderAPI{},
-			"Total Surface Area",
-		},
-		{
-			"Rectangular Prism",
-			"rectangular-prism",
-			&TsaRectangularPrismAPI{},
-			"Total Surface Area",
-		},
-		{
-			"Sphere",
-			"sphere",
-			&TsaSphereAPI{},
-			"Total Surface Area",
-		},
-		{
-			"Square Based Triangle",
-			"square-based-triangle",
-			&TsaSquareBaseTriangleAPI{},
-			"Total Surface Area",
-		},
-	}
-
+func FindMath(slug string) (MatheFunc, error) {
 	for _, calc := range calculations {
 		if calc.Slug == slug {
 			return calc.Math, nil
