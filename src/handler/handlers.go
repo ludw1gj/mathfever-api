@@ -2,10 +2,10 @@ package handler
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
-	"github.com/aws/aws-lambda-go/events"
-	"github.com/ludw1gj/mathfever-api/src/api"
+	"gitlab.com/ludw1gj/mathfever-api/src/api"
+	"log"
+	"net/http"
 	"strings"
 )
 
@@ -17,74 +17,53 @@ type ErrorJSONResponse struct {
 	Error string `json:"error"`
 }
 
-func CategoriesHandler(_ *events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	return handleResponse(api.GetCategoriesJson())
+func CategoriesHandler(w http.ResponseWriter, _ *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	if _, err := w.Write([]byte(api.GetCategoriesJson())); err != nil {
+		log.Println(err)
+	}
 }
 
-func CalculationHandler(request *events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	calculationSlug := strings.Replace(request.Path, "/calculation/", "", 1)
+func CalculationHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	calculationSlug := strings.Replace(r.URL.Path, "/calculation/", "", 1)
 	calculation, err := api.FindMath(calculationSlug)
 	if err != nil {
-		return handleErrorResponse(err, "invalid slug", 404)
+		w.WriteHeader(http.StatusNotFound)
+		_ = json.NewEncoder(w).Encode(ErrorJSONResponse{"invalid slug"})
 	}
 
-	payload, err := calculation.ExecuteMath(request.Body)
+	decoder := json.NewDecoder(r.Body)
+	err = decoder.Decode(&calculation)
 	if err != nil {
-		return handleErrorResponse(err, "ExecuteMath fault", 400)
+		w.WriteHeader(http.StatusBadRequest)
+		_ = json.NewEncoder(w).Encode(ErrorJSONResponse{fmt.Sprintf("Malformed JSON request - %v", err.Error())})
+		return
+	}
+
+	payload, err := calculation.ExecuteMath()
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		_ = json.NewEncoder(w).Encode(ErrorJSONResponse{fmt.Sprintf("Could not execute math - %v", err.Error())})
+		return
 	}
 
 	respBody, err := json.Marshal(CalculationResponse{Content: payload})
 	if err != nil {
-		return handleErrorResponse(err, "failed to marshal payload", 500)
+		w.WriteHeader(http.StatusInternalServerError)
+		_ = json.NewEncoder(w).Encode(ErrorJSONResponse{"failed to marshal payload"})
 	}
-	return handleResponse(string(respBody))
+
+	w.WriteHeader(http.StatusOK)
+	if _, err := w.Write(respBody); err != nil {
+		log.Println(err)
+	}
 }
 
-func NotFoundHandler(_ *events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	err := errors.New("invalid path")
-	return handleErrorResponse(err, "please request valid route", 404)
-}
-
-func handleResponse(body string) (events.APIGatewayProxyResponse, error) {
-	resp := events.APIGatewayProxyResponse{
-		IsBase64Encoded: true,
-		StatusCode:      200,
-		Body:            body,
-		Headers: map[string]string{
-			"Content-Type":                     "application/json",
-			"Access-Control-Allow-Origin":      "*",
-			"Access-Control-Allow-Credentials": "true",
-		},
-	}
-	return resp, nil
-}
-
-func handleErrorResponse(err error, msg string, code int) (events.APIGatewayProxyResponse, error) {
-	newErr := fmt.Errorf("%s - %v", msg, err.Error())
-	jsonErrResp, err := json.Marshal(ErrorJSONResponse{Error: newErr.Error()})
-	if err != nil {
-		resp := events.APIGatewayProxyResponse{
-			IsBase64Encoded: true,
-			StatusCode:      500,
-			Body:            `{"error": "Failed to marshal error response on server."}`,
-			Headers: map[string]string{
-				"Content-Type":                     "application/json",
-				"Access-Control-Allow-Origin":      "*",
-				"Access-Control-Allow-Credentials": "true",
-			},
-		}
-		return resp, nil
-	}
-
-	resp := events.APIGatewayProxyResponse{
-		IsBase64Encoded: true,
-		StatusCode:      code,
-		Body:            string(jsonErrResp),
-		Headers: map[string]string{
-			"Content-Type":                     "application/json",
-			"Access-Control-Allow-Origin":      "*",
-			"Access-Control-Allow-Credentials": "true",
-		},
-	}
-	return resp, nil
+func NotFoundHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	_ = json.NewEncoder(w).Encode(ErrorJSONResponse{"invalid path - please request valid route"})
 }

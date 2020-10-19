@@ -1,8 +1,5 @@
-module github.com/ludw1gj/mathfever-api
+module gitlab.com/ludw1gj/mathfever-api
 
-go 1.12
+go 1.14
 
-require (
-	github.com/aws/aws-lambda-go v1.9.0
-	github.com/stretchr/testify v1.3.0 // indirect
-)
+require github.com/gorilla/mux v1.8.0
