@@ -21,6 +21,14 @@ type Calculation struct {
 	CategorySlug string             `json:"categorySlug"` // the slug of the category the calculation belongs to
 }
 
+// CalculationShort is needed for getting slugs
+type CalculationShort struct {
+	Name     string    // name of the calculation
+	Slug     string    // slug of the calculation
+	Math     MatheFunc // math struct
+	Category string    // the name of the category the calculation belongs to
+}
+
 // CalculationInput describes an input name and input json field of a calculation.
 type CalculationInput struct {
 	Name string `json:"name"` // name of input eg. Side A

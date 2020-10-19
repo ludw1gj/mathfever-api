@@ -18,12 +18,12 @@ func BinaryToDecimal(binary string) (string, error) {
 	var answer int
 	for _, digit := range binary {
 		digit, _ := strconv.ParseInt(string(digit), base, 0)
-		power := int(math.Pow(base, float64(power)))
-		stepValue := int(digit) * power
+		basePow := int(math.Pow(base, float64(power)))
+		stepValue := int(digit) * basePow
 
 		fmt.Fprintf(&proofStepsBuf[0], "(b=%d x %d<sup>n=%d</sup>) + ", digit, base, power)
 		fmt.Fprintf(&proofStepsBuf[1], "(%d x %d<sup>%d</sup>) + ", digit, base, power)
-		fmt.Fprintf(&proofStepsBuf[2], "(%d x %d) + ", digit, power)
+		fmt.Fprintf(&proofStepsBuf[2], "(%d x %d) + ", digit, basePow)
 		fmt.Fprintf(&proofStepsBuf[3], "(%d) + ", stepValue)
 
 		answer += stepValue

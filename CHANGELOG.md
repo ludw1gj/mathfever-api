@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.0.0 2020-10-19
+
+## Changed
+
+- Project is no longer a AWS serverless function, now it is a general golang mux server destined for a docker image. 
+
 ## 1.2.3 - 2019-04-02
 
 ### Changed
