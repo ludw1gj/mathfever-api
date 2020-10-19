@@ -7,6 +7,6 @@ import (
 )
 
 func main() {
-	log.Println("mathfever listening on port 8000...")
+	log.Println("mathfever-api server listening on port 8000...")
 	log.Fatal(http.ListenAndServe(":8000", router.Load()))
 }
