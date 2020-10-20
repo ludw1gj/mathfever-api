@@ -19,21 +19,22 @@ type ErrorJSONResponse struct {
 
 func CategoriesHandler(w http.ResponseWriter, _ *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
+
 	if _, err := w.Write([]byte(api.GetCategoriesJson())); err != nil {
 		log.Println(err)
+		return
 	}
 }
 
 func CalculationHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
 
 	calculationSlug := strings.Replace(r.URL.Path, "/calculation/", "", 1)
 	calculation, err := api.FindMath(calculationSlug)
 	if err != nil {
 		w.WriteHeader(http.StatusNotFound)
 		_ = json.NewEncoder(w).Encode(ErrorJSONResponse{"invalid slug"})
+		return
 	}
 
 	decoder := json.NewDecoder(r.Body)
@@ -55,11 +56,13 @@ func CalculationHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		_ = json.NewEncoder(w).Encode(ErrorJSONResponse{"failed to marshal payload"})
+		return
 	}
 
 	w.WriteHeader(http.StatusOK)
 	if _, err := w.Write(respBody); err != nil {
 		log.Println(err)
+		return
 	}
 }
 
