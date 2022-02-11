@@ -9,3 +9,7 @@ problems. Serves as a backend to the React frontend implementation:
 docker build -t mathfever-api-image .
 docker run --name mathfever-api-container -p 8000:8000 -d mathfever-api-image
 ```
+
+## AWS Lamba
+
+The AWS Lambda / Serverless Framework version lives on branch: [aws-serverless](https://gitlab.com/ludw1gj/mathfever-api/-/tree/aws-serverless).
